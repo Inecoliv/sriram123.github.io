@@ -1,107 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Services - Inecoliv</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body { margin:0; font-family: Arial; }
-
-    nav {
-      background:#c1121f;
-      color:white;
-      padding:15px 40px;
-      display:flex;
-      justify-content:space-between;
-    }
-
-    nav a { color:white; margin-left:20px; text-decoration:none; }
-
-    .section { padding:60px 20px; }
-
-    .container { max-width:1200px; margin:auto; }
-
-    .grid {
-      display:flex;
-      flex-wrap:wrap;
-      gap:25px;
-      justify-content:center;
-    }
-
-    .card {
-      width:280px;
-      border-radius:10px;
-      overflow:hidden;
-      box-shadow:0 4px 15px rgba(0,0,0,0.15);
-      transition:0.3s;
-      cursor:pointer;
-      background:white;
-    }
-
-    .card:hover {
-      transform:translateY(-8px);
-      box-shadow:0 8px 25px rgba(0,0,0,0.25);
-    }
-
-    .card img {
-      width:100%;
-      height:180px;
-      object-fit:cover;
-    }
-
-    .card h3 {
-      padding:15px;
-      text-align:center;
-    }
-
-  </style>
+<style>
+body { margin:0; font-family: Arial; }
+.card {
+  width:260px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+  margin:20px;
+}
+.card img { width:100%; height:180px; object-fit:cover; }
+</style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<nav>
-  <div><b>INECOLIV</b></div>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-  </div>
-</nav>
+<!-- SAME HEADER (COPY FROM INDEX) -->
 
-<section class="section">
-  <div class="container">
+<!-- SERVICES -->
+<section style="padding:60px;text-align:center;">
+<h2>Services & Solutions</h2>
 
-    <h2>Services & Solutions</h2>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;">
 
-    <div class="grid">
+<a href="fiber.html"><div class="card">
+<img src="https://images.unsplash.com/photo-1581091870622-2c9f6d8c52c2?auto=format&fit=crop&w=400&q=60">
+<h3>Fiber Infrastructure</h3>
+</div></a>
 
-      <!-- Fiber -->
-      <a href="fiber.html">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1581091870622-2c9f6d8c52c2">
-          <h3>Fiber Optic Infrastructure</h3>
-        </div>
-      </a>
+<a href="network.html"><div class="card">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=60">
+<h3>Network Security</h3>
+</div></a>
 
-      <!-- Rack -->
-      <a href="rack.html">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1581091215367-59ab6b4c6c8b">
-          <h3>Rack Infrastructure</h3>
-        </div>
-      </a>
+<a href="server.html"><div class="card">
+<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=60">
+<h3>Server & Storage</h3>
+</div></a>
 
-      <!-- Server -->
-      <a href="server.html">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31">
-          <h3>Server Room Setup</h3>
-        </div>
-      </a>
+<a href="camera.html"><div class="card">
+<img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=400&q=60">
+<h3>Surveillance</h3>
+</div></a>
 
-    </div>
-
-  </div>
+</div>
 </section>
 
 </body>
