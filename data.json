@@ -1,22 +1,22 @@
 {
   "customers": [
-    { "name": "Foxconn", "img": "images/foxconn.png" }
+    { "name": "Foxconn" }
   ],
   "partners": [
-    { "name": "Cisco", "img": "images/cisco.png" },
-    { "name": "HPE Aruba", "img": "images/aruba.png" },
-    { "name": "Fortinet", "img": "images/fortinet.png" },
-    { "name": "Palo Alto", "img": "images/paloalto.png" },
-    { "name": "Check Point", "img": "images/checkpoint.png" },
-    { "name": "F5", "img": "images/f5.png" },
-    { "name": "Citrix", "img": "images/citrix.png" },
-    { "name": "Dell", "img": "images/dell.png" },
-    { "name": "HPE", "img": "images/hpe.png" },
-    { "name": "VMware", "img": "images/vmware.png" },
-    { "name": "HP", "img": "images/hp.png" },
-    { "name": "Logitech", "img": "images/logitech.png" },
-    { "name": "Avaya", "img": "images/avaya.png" },
-    { "name": "Lenovo", "img": "images/lenovo.png" },
-    { "name": "NetApp", "img": "images/netapp.png" }
+    { "name": "Cisco" },
+    { "name": "HPE Aruba" },
+    { "name": "Fortinet" },
+    { "name": "Palo Alto" },
+    { "name": "Check Point" },
+    { "name": "F5" },
+    { "name": "Citrix" },
+    { "name": "Dell" },
+    { "name": "HPE" },
+    { "name": "VMware" },
+    { "name": "HP" },
+    { "name": "Logitech" },
+    { "name": "Avaya" },
+    { "name": "Lenovo" },
+    { "name": "NetApp" }
   ]
 }
