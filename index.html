@@ -45,6 +45,7 @@
       justify-content:center;
       background:white;
       padding:10px;
+      font-weight:bold;
     }
 
     footer {
@@ -80,14 +81,14 @@
 <!-- CUSTOMERS -->
 <section class="section">
   <h2>Featured Customers</h2>
-  <p>We support enterprise customers by delivering reliable and scalable IT infrastructure solutions tailored to their needs.</p>
+  <p>We support enterprise customers by delivering reliable IT infrastructure solutions.</p>
   <div id="customers" class="grid"></div>
 </section>
 
 <!-- PARTNERS -->
 <section class="section">
   <h2>Technology Partners</h2>
-  <p>We work with trusted technology brands to deliver high-quality networking, security, and infrastructure solutions.</p>
+  <p>We work with trusted technology brands to deliver networking and infrastructure solutions.</p>
   <div id="partners" class="grid"></div>
 </section>
 
@@ -133,7 +134,7 @@ async function loadData() {
   data.customers.forEach(item => {
     customersDiv.innerHTML += `
       <div class="box">
-        <img src="${item.img}" alt="${item.name}" style="max-width:100%;max-height:80px;">
+        ${item.name}
       </div>
     `;
   });
@@ -143,7 +144,7 @@ async function loadData() {
   data.partners.forEach(item => {
     partnersDiv.innerHTML += `
       <div class="box">
-        <img src="${item.img}" alt="${item.name}" style="max-width:100%;max-height:80px;">
+        ${item.name}
       </div>
     `;
   });
