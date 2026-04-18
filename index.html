@@ -1,151 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Inecoliv Technology India Pvt Ltd</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inecoliv</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body { margin:0; font-family: Arial; }
+<style>
+body { margin:0; font-family: Arial; }
 
-    /* NAVBAR */
-    nav {
-      position:sticky;
-      top:0;
-      background:#c1121f;
-      color:white;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:12px 40px;
-      z-index:1000;
-    }
+/* HEADER */
+nav {
+  background:#c1121f;
+  color:white;
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .logo { display:flex; align-items:center; gap:10px; }
-    .logo img { height:50px; }
+.logo { display:flex; align-items:center; gap:10px; }
+.logo img { height:40px; }
 
-    nav a {
-      color:white;
-      margin-left:20px;
-      text-decoration:none;
-      font-size:14px;
-      transition:0.3s;
-    }
+.menu { display:flex; gap:25px; align-items:center; }
+.menu a { color:white; text-decoration:none; }
 
-    nav a:hover { opacity:0.7; }
+.dropdown { position:relative; }
 
-    .contact-btn {
-      background:#ff4d4d;
-      padding:8px 15px;
-      border-radius:5px;
-    }
+.dropdown-content {
+  display:none;
+  position:absolute;
+  background:white;
+  top:40px;
+  right:0;
+  width:260px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
 
-    /* DROPDOWN */
-    .dropdown { position:relative; display:inline-block; }
+.dropdown-content a {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  text-decoration:none;
+  color:black;
+}
 
-    .dropdown-content {
-      display:none;
-      position:absolute;
-      background:white;
-      color:black;
-      top:30px;
-      min-width:200px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    }
+.dropdown-content img {
+  width:40px;
+  height:40px;
+  object-fit:cover;
+}
 
-    .dropdown-content a {
-      display:block;
-      padding:10px;
-      color:black;
-    }
+.dropdown:hover .dropdown-content {
+  display:block;
+}
 
-    .dropdown:hover .dropdown-content {
-      display:block;
-    }
+/* HERO */
+.hero {
+  height:400px;
+  background:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=60');
+  background-size:cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+}
 
-    /* HERO */
-    .hero {
-      height:400px;
-      background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-      url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31');
-      background-size:cover;
-      color:white;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
-
-    .hero h1 { font-size:36px; }
-    .hero p { max-width:600px; }
-
-    /* SECTION */
-    .section { padding:60px 20px; text-align:center; }
-
-    .container { max-width:1100px; margin:auto; }
-
-    /* CARDS */
-    .grid {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:25px;
-    }
-
-    .card {
-      width:200px;
-      padding:20px;
-      border-radius:10px;
-      background:white;
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
-      transition:0.3s;
-    }
-
-    .card:hover {
-      transform:translateY(-5px);
-      box-shadow:0 6px 20px rgba(0,0,0,0.2);
-    }
-
-    /* ABOUT */
-    .about {
-      background:#f9f9f9;
-      text-align:left;
-      padding:60px 20px;
-    }
-
-    .about .container {
-      max-width:900px;
-    }
-
-    .about p { line-height:1.8; color:#444; }
-
-    /* STAFF */
-    .staff {
-      display:flex;
-      gap:40px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-
-    .staff img {
-      width:400px;
-      border-radius:10px;
-    }
-
-    /* FOOTER */
-    footer {
-      background:#c1121f;
-      color:white;
-      padding:40px;
-    }
-
-  </style>
+.section {
+  padding:60px 20px;
+  text-align:center;
+}
+</style>
 </head>
 
 <body>
 
-<!-- NAV -->
+<!-- HEADER -->
 <nav>
   <div class="logo">
     <img src="logo.png">
@@ -155,121 +86,54 @@
     </div>
   </div>
 
-  <div>
+  <div class="menu">
     <a href="index.html">Home</a>
-    <a href="#">Products</a>
+    <a href="products.html">Products</a>
 
     <div class="dropdown">
-      <a href="#">Services & Solutions ▼</a>
+      <a href="services.html">Services ▼</a>
+
       <div class="dropdown-content">
-        <a href="#">Network Systems</a>
-        <a href="#">Enterprise Wi-Fi</a>
-        <a href="#">Server & Storage</a>
-        <a href="#">Security Systems</a>
-        <a href="#">IT Outsourcing</a>
+        <a href="fiber.html">
+          <img src="https://images.unsplash.com/photo-1581091870622-2c9f6d8c52c2?auto=format&fit=crop&w=400&q=60">
+          Fiber Infrastructure
+        </a>
+
+        <a href="network.html">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=60">
+          Network Security
+        </a>
+
+        <a href="server.html">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=60">
+          Server & Storage
+        </a>
+
+        <a href="camera.html">
+          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=400&q=60">
+          Surveillance
+        </a>
       </div>
     </div>
 
-    <a href="#" class="contact-btn">Contact Us</a>
+    <a href="contact.html">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<div class="hero">
   <h1>INECOLIV – Reliable IT Solutions</h1>
-  <p>Delivering networking, security, and infrastructure solutions for modern businesses.</p>
-</section>
+  <p>Networking, Security & Infrastructure for modern businesses</p>
+</div>
 
 <!-- ABOUT -->
-<section class="about">
-  <div class="container">
-    <h2>About Inecoliv</h2>
-
-    <p>
-      <b>Inecoliv Technology India Pvt Ltd</b>, established in 2024 in Chennai, operates as part of a global network with presence in China and Vietnam.
-    </p>
-
-    <p>
-      We focus on IT product sales and services, including networking, security, infrastructure, and system integration.
-    </p>
-
-    <p>
-      Our goal is to deliver reliable, scalable, and enterprise-ready solutions tailored to modern business needs.
-    </p>
-  </div>
-</section>
-
-<!-- CUSTOMERS -->
 <section class="section">
-  <h2>Featured Customers</h2>
-  <div class="grid">
-    <div class="card">Foxconn</div>
-  </div>
+  <h2>About Inecoliv Technology India Pvt Ltd</h2>
+  <p>
+  Established in 2024 in Chennai, Inecoliv Technology India Pvt Ltd operates as part of a global presence across China and Vietnam.
+  We specialize in IT product sales and services including networking, security, infrastructure, and system integration.
+  </p>
 </section>
-
-<!-- PARTNERS -->
-<section class="section">
-  <h2>Technology Partners</h2>
-  <div class="grid">
-    <div class="card">Cisco</div>
-    <div class="card">HPE</div>
-    <div class="card">Aruba</div>
-    <div class="card">Fortinet</div>
-    <div class="card">Dell</div>
-    <div class="card">VMware</div>
-  </div>
-</section>
-
-<!-- STAFF -->
-<section class="section" style="background:#f4f4f4;">
-  <div class="staff">
-
-    <div style="max-width:500px;text-align:left;">
-      <h2>Staffing Size</h2>
-      <h3 style="color:#c1121f;">+80 people including India and Overseas</h3>
-
-      <p>Professional project management team with PMP & ISO certifications.</p>
-
-      <p><b>Certifications:</b></p>
-      <p>Cisco: CCNA, CCNP</p>
-      <p>HPE-Aruba: ACP-CA, ACSA, ACSP</p>
-      <p>Ruijie: RCNA, RCNP</p>
-      <p>Microsoft: MCSA</p>
-      <p>Fortinet: FCA, FCF</p>
-    </div>
-
-    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
-
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;">
-    <div>
-      <img src="logo.png" width="120"><br><br>
-      GLOBAL ICT SOLUTION PROVIDER
-    </div>
-
-    <div>
-      <h3>Products</h3>
-      <p>Switch</p>
-      <p>Router</p>
-      <p>Firewall</p>
-    </div>
-
-    <div>
-      <h3>Services</h3>
-      <p>Network</p>
-      <p>Security</p>
-      <p>Infrastructure</p>
-    </div>
-  </div>
-
-  <hr>
-
-  <p style="text-align:center;">© 2026 Inecoliv Technology India Pvt Ltd</p>
-</footer>
 
 </body>
 </html>
