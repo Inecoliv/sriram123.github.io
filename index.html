@@ -8,8 +8,8 @@
 <style>
 body {
   margin:0;
-  font-family: Arial, sans-serif;
-  background:#f5f5f5;
+  font-family: Arial;
+  background:#f4f4f4;
 }
 
 /* HEADER */
@@ -66,21 +66,40 @@ nav {
   gap:25px;
 }
 
-.box {
+/* CARDS */
+.card {
+  width:240px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px 10px 0 0;
+}
+
+.card h3 {
+  padding:15px;
+}
+
+/* LOGO BOX */
+.logo-box {
   width:180px;
   height:100px;
   background:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:8px;
+  border-radius:10px;
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-.box img {
+.logo-box img {
   max-width:120px;
   max-height:60px;
-  object-fit:contain;
 }
 
 /* STAFF */
@@ -96,7 +115,7 @@ nav {
 .staff-text { flex:1; }
 
 .staff img {
-  width:400px;
+  width:420px;
   border-radius:10px;
 }
 
@@ -104,7 +123,7 @@ nav {
 footer {
   background:#c1121f;
   color:white;
-  padding:50px 60px;
+  padding:60px;
 }
 
 .footer-grid {
@@ -118,13 +137,13 @@ footer {
 .footer-col a {
   display:block;
   color:white;
+  margin:6px 0;
   text-decoration:none;
-  margin:5px 0;
 }
 
 .footer-bottom {
   text-align:center;
-  margin-top:30px;
+  margin-top:20px;
   border-top:1px solid rgba(255,255,255,0.3);
   padding-top:10px;
 }
@@ -146,10 +165,10 @@ footer {
   </div>
 
   <div class="menu">
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
   </div>
 </nav>
 
@@ -164,25 +183,47 @@ footer {
 
 <section class="section">
   <h2>About Inecoliv</h2>
-  <p>
-  Inecoliv Technology India Pvt Ltd, established in 2024 in Chennai, operates as part of a global network across China and Vietnam.
-  </p>
-  <p>
-  We focus on IT product sales and services including networking, security, infrastructure, and system integration.
-  </p>
-  <p>
-  Our goal is to deliver reliable, scalable, and enterprise-ready solutions tailored to modern business needs.
-  </p>
+  <p>Inecoliv Technology India Pvt Ltd, established in 2024 in Chennai, operates globally.</p>
+  <p>We specialize in networking, security, infrastructure, and system integration.</p>
+</section>
+
+<!-- SERVICES -->
+
+<section class="section">
+  <h2>Services & Solutions</h2>
+
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1581091870622-2c9f6d8c52c2?auto=format&fit=crop&w=800&q=80">
+      <h3>Fiber Infrastructure</h3>
+    </div>
+
+```
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80">
+  <h3>Network Security</h3>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80">
+  <h3>Server & Storage</h3>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80">
+  <h3>Surveillance</h3>
+</div>
+```
+
+  </div>
 </section>
 
 <!-- CUSTOMERS -->
 
 <section class="section">
   <h2>Featured Customers</h2>
-  <div class="grid">
-    <div class="box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Foxconn_logo.svg">
-    </div>
+  <div class="logo-box">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Foxconn_logo.svg">
   </div>
 </section>
 
@@ -194,27 +235,27 @@ footer {
   <div class="grid">
 
 ```
-<div class="box">
+<div class="logo-box">
   <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg">
 </div>
 
-<div class="box">
+<div class="logo-box">
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Hewlett_Packard_Enterprise_logo.svg">
 </div>
 
-<div class="box">
+<div class="logo-box">
   <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Aruba_Networks_logo.svg">
 </div>
 
-<div class="box">
+<div class="logo-box">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg">
 </div>
 
-<div class="box">
+<div class="logo-box">
   <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg">
 </div>
 
-<div class="box">
+<div class="logo-box">
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Vmware.svg">
 </div>
 ```
@@ -242,7 +283,7 @@ Fortinet: FCA, FCF
 
   </div>
 
-  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80">
+  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80">
 </section>
 
 <!-- FOOTER -->
@@ -253,27 +294,27 @@ Fortinet: FCA, FCF
 ```
 <div>
   <img src="logo.png" style="height:60px"><br><br>
-  <p>GLOBAL ICT SOLUTION PROVIDER</p>
+  GLOBAL ICT SOLUTION PROVIDER
 </div>
 
-<div>
+<div class="footer-col">
   <h3>Products</h3>
   <a>Switch</a>
   <a>Router</a>
   <a>Firewall</a>
 </div>
 
-<div>
+<div class="footer-col">
   <h3>Services</h3>
   <a>Network</a>
   <a>Security</a>
   <a>Infrastructure</a>
 </div>
 
-<div>
+<div class="footer-col">
   <h3>Contact</h3>
-  <p>Chennai, India</p>
-  <p>info@inecoliv.com</p>
+  Chennai, India<br>
+  info@inecoliv.com
 </div>
 ```
 
