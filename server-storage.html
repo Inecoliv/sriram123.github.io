@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server and Storage Systems | Inecoliv</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c40000;
+            --primary-dark: #8b0000;
+            --text-dark: #1f2937;
+            --text-body: #4b5563;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; color: var(--text-dark); margin-bottom: 15px; }
+
+        /* --- Header & Navigation (Matches Homepage) --- */
+        .navbar {
+            background: var(--white); position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 15px 8%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm);
+        }
+        .brand-container { display: flex; align-items: center; text-decoration: none; }
+        .brand-container img { height: 50px; margin-right: 16px; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-name { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); line-height: 1.2; }
+        .brand-slogan { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; font-weight: 600; }
+
+        .nav-menu { display: flex; list-style: none; gap: 35px; }
+        .nav-menu a {
+            text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem;
+            transition: var(--transition); position: relative;
+        }
+        .nav-menu a:hover { color: var(--primary); }
+        .nav-menu a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: var(--primary); transition: var(--transition);
+        }
+        .nav-menu a:hover::after { width: 100%; }
+
+        /* --- Service Hero Banner --- */
+        .service-hero {
+            height: 50vh; margin-top: 80px;
+            background: linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.8)),
+                        url('server-storage.jpg') center/cover no-repeat;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px; color: white;
+        }
+        .service-hero h1 { color: white; font-size: 3.5rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; }
+        .service-hero p { font-size: 1.2rem; font-weight: 400; opacity: 0.9; text-transform: uppercase; letter-spacing: 2px;}
+
+        /* --- Main Content Area --- */
+        .content-section { padding: 80px 15%; max-width: 1400px; margin: 0 auto; }
+        
+        .intro-text { text-align: center; font-size: 1.2rem; font-weight: 500; color: var(--text-dark); margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.9;}
+        
+        /* Highlight Boxes */
+        .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .highlight-box { text-align: center; padding: 30px; background: var(--bg-light); border-radius: 12px; border-top: 4px solid var(--primary); }
+        .highlight-box h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
+
+        /* Article Formatting */
+        .article-block { margin-bottom: 50px; }
+        .article-block h2 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; }
+        .article-block h3 { font-size: 1.4rem; color: var(--primary); margin-top: 30px; margin-bottom: 10px; }
+        .article-block p { margin-bottom: 15px; font-size: 1.05rem; }
+        .article-block ul { margin-left: 20px; margin-bottom: 20px; }
+        .article-block li { margin-bottom: 10px; font-size: 1.05rem; }
+        .article-block li strong { color: var(--text-dark); }
+
+        /* CTA Section */
+        .cta-box { background-color: var(--text-dark); color: white; padding: 40px; text-align: center; border-radius: 12px; margin-top: 60px; }
+        .cta-box h3 { color: white; font-size: 1.8rem; }
+        .cta-box p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;}
+        .cta-button { display: inline-block; background: var(--primary); color: white; padding: 12px 30px; text-decoration: none; font-weight: 600; border-radius: 6px; transition: var(--transition); }
+        .cta-button:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* --- Footer (Matches Homepage) --- */
+        .footer { background-color: #111827; color: #9ca3af; padding: 80px 8% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-brand { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .footer-brand img { height: 45px; background: white; padding: 4px; border-radius: 4px; }
+        .footer-brand h3 { color: white; font-size: 1.5rem; margin: 0; }
+        .footer-col h4 { color: white; font-size: 1.1rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #9ca3af; text-decoration: none; transition: var(--transition); }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #374151; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .content-section { padding: 50px 5%; }
+            .service-hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="brand-container">
+            <img src="logo.png" alt="Inecoliv Logo">
+            <div class="brand-text">
+                <span class="brand-name">Inecoliv Technology India Pvt Ltd</span>
+                <span class="brand-slogan">Global ICT Solutions</span>
+            </div>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="service-hero">
+        <h1>Server & Storage Systems</h1>
+        <p>Consulting, Design, and Implementation</p>
+    </header>
+
+    <section class="content-section">
+        
+        <p class="intro-text">
+            As a company specializing in IT system consulting, design, and implementation, we always adhere to advanced technical standards and best practices to ensure that your business's server and storage systems achieve performance, availability, scalability, security, and cost optimization goals.
+        </p>
+
+        <div class="highlight-grid">
+            <div class="highlight-box">
+                <h3>High Availability</h3>
+                <p>Hardware and software redundancy models ensure continuous operations.</p>
+            </div>
+            <div class="highlight-box">
+                <h3>Data Security</h3>
+                <p>Advanced security standards applied from the physical to the application layer.</p>
+            </div>
+            <div class="highlight-box">
+                <h3>Virtualization & Backup</h3>
+                <p>Resource optimization with rapid recovery solutions to ensure zero data loss.</p>
+            </div>
+        </div>
+
+        <div class="article-block">
+            <h2>1. Overall Design Principles</h2>
+            <ul>
+                <li><strong>High Availability (HA):</strong> Ensures continuous system operation through hardware and software redundancy models.</li>
+                <li><strong>Scalability:</strong> The system is designed to be easily scalable to meet the growing needs of the business.</li>
+                <li><strong>High Performance:</strong> Optimized processing speed, data storage, and retrieval to support critical business applications.</li>
+                <li><strong>Data security and safety:</strong> Applying advanced security standards in design, from the physical layer to the application layer.</li>
+                <li><strong>Centralized management and monitoring capabilities:</strong> Easy operation, monitoring, alerts, and troubleshooting through modern management platforms.</li>
+            </ul>
+        </div>
+
+        <div class="article-block">
+            <h2>2. Main Components of the System</h2>
+            <ul>
+                <li><strong>Servers:</strong> Utilize high-performance server systems that support virtualization, clustering, and integration with popular operating systems such as Windows Server and Linux.</li>
+                <li><strong>Storage System:</strong> Deploying centralized storage solutions such as SAN/NAS, supporting storage tiering, snapshots, replication, and backups.</li>
+                <li><strong>Network infrastructure:</strong> High-speed network design (1/10/25/40/100Gbps), with redundancy, separation of server and storage traffic, and protection by VLANs and ACLs.</li>
+                <li><strong>Virtualization solutions:</strong> Deploy virtualization platforms (VMware, Hyper-V, Proxmox, etc.) to optimize resources, facilitate management, and increase scalability.</li>
+                <li><strong>Backup & Recovery (DR) Solution:</strong> Integrates tools for scheduled backups and rapid recovery, ensuring no data loss.</li>
+            </ul>
+        </div>
+
+        <div class="article-block">
+            <h2>3. Adhere to International Standards</h2>
+            <p>Our consulting and design services are based on best practices from leading technology companies such as HPE, Dell EMC, Cisco, VMware, Microsoft, and more, ensuring your infrastructure meets global benchmarks.</p>
+        </div>
+
+        <div class="article-block">
+            <h2>4. Additional Services</h2>
+            <ul>
+                <li>We advise on solutions that suit your needs and budget.</li>
+                <li>Design the overall and detailed architectural plans.</li>
+                <li>Deploy, configure, and test the system.</li>
+                <li>Document transfer, operational training, and post-deployment support.</li>
+            </ul>
+        </div>
+
+        <div class="cta-box">
+            <h3>Ready to upgrade your server & storage infrastructure?</h3>
+            <p>Contact our experts to design a high-performance, secure, and scalable data center for your business.</p>
+            <a href="index.html#contact" class="cta-button">Contact Us Now</a>
+        </div>
+
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="Inecoliv Logo">
+                    <h3>Inecoliv</h3>
+                </div>
+                <p style="margin-top: 15px;"><strong>Inecoliv Technology India Pvt Ltd</strong><br>Global ICT Solution Provider</p>
+            </div>
+            <div class="footer-col">
+                <h4>Core Products</h4>
+                <ul>
+                    <li><a href="products.html">Switching & Routing</a></li>
+                    <li><a href="products.html">Wireless Access Points</a></li>
+                    <li><a href="products.html">Next-Gen Firewalls</a></li>
+                    <li><a href="products.html">Hyperconverged Infra</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Key Services</h4>
+                <ul>
+                    <li><a href="index.html#services">Network Architecture</a></li>
+                    <li><a href="index.html#services">Cybersecurity Audits</a></li>
+                    <li><a href="index.html#services">Infrastructure Management</a></li>
+                    <li><a href="index.html#services">System Integration</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li style="display: flex; gap: 10px;"><span>📍</span> Chennai, India</li>
+                    <li style="display: flex; gap: 10px;"><span>📧</span> info@inecoliv.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Inecoliv Technology India Pvt Ltd. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
