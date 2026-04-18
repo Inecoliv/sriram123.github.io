@@ -1,0 +1,14 @@
+{
+  "customers": [
+    "Foxconn",
+    "Wistron",
+    "Qisda",
+    "Cooler Master"
+  ],
+  "partners": [
+    "Cisco",
+    "Dell",
+    "Huawei",
+    "HPE"
+  ]
+}
