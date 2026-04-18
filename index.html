@@ -1,84 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Inecoliv</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inecoliv</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body { margin:0; font-family: Arial; }
+  <style>
+    body { margin:0; font-family: Arial; }
 
-/* HEADER */
-nav {
-  background:#c1121f;
-  color:white;
-  padding:15px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+    /* HEADER */
+    nav {
+      background:#c1121f;
+      color:white;
+      padding:15px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
 
-.logo { display:flex; align-items:center; gap:10px; }
-.logo img { height:40px; }
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
 
-.menu a {
-  color:white;
-  text-decoration:none;
-  margin-left:20px;
-}
+    .logo img { height:40px; }
 
-/* HERO */
-.hero {
-  height:420px;
-  background:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=60');
-  background-size:cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  text-align:center;
-}
+    .menu { display:flex; gap:25px; align-items:center; }
 
-/* SECTION */
-.section {
-  padding:60px 20px;
-  max-width:1100px;
-  margin:auto;
-}
+    .menu a { color:white; text-decoration:none; }
 
-/* SERVICES */
-.grid {
-  display:flex;
-  flex-wrap:wrap;
-  gap:25px;
-  justify-content:center;
-}
+    /* HERO */
+    .hero {
+      height:400px;
+      background:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31');
+      background-size:cover;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      text-align:center;
+    }
 
-.card {
-  width:250px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.15);
-  text-align:center;
-  transition:0.3s;
-}
-
-.card img {
-  width:100%;
-  height:160px;
-  object-fit:cover;
-}
-
-.card:hover {
-  transform:translateY(-5px);
-}
-
-/* STAFF */
-.staff {
-  display:flex;
-  gap:40px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-</style>
+    .section {
+      padding:60px 20px;
+      text-align:center;
+    }
+  </style>
 </head>
 
 <body>
@@ -96,6 +64,7 @@ nav {
   <div class="menu">
     <a href="index.html">Home</a>
     <a href="products.html">Products</a>
+    <!-- FIX: Removed dropdown -->
     <a href="services.html">Services</a>
     <a href="contact.html">Contact</a>
   </div>
@@ -108,76 +77,13 @@ nav {
 </div>
 
 <!-- ABOUT -->
-<div class="section">
-  <h2 style="text-align:center;">About Inecoliv Technology India Pvt Ltd</h2>
-  <p style="text-align:center;">
+<section class="section">
+  <h2>About Inecoliv Technology India Pvt Ltd</h2>
+  <p>
   Established in 2024 in Chennai, Inecoliv Technology India Pvt Ltd operates as part of a global presence across China and Vietnam.
   We specialize in IT product sales and services including networking, security, infrastructure, and system integration.
   </p>
-</div>
-
-<!-- SERVICES PREVIEW -->
-<div class="section">
-  <h2 style="text-align:center;">Our Services</h2>
-
-  <div class="grid">
-
-    <a href="fiber.html">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1581091870622-2c9f6d8c52c2?auto=format&fit=crop&w=400&q=60">
-        <h3>Fiber Infrastructure</h3>
-      </div>
-    </a>
-
-    <a href="network.html">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=60">
-        <h3>Network Security</h3>
-      </div>
-    </a>
-
-    <a href="server.html">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=60">
-        <h3>Server & Storage</h3>
-      </div>
-    </a>
-
-    <a href="camera.html">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=400&q=60">
-        <h3>Surveillance</h3>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- STAFF -->
-<div class="section">
-  <h2>Staffing Size</h2>
-
-  <div class="staff">
-    <div>
-      <h3 style="color:#c1121f;">+80 People (India & Overseas)</h3>
-
-      <p>
-      PMP & ISO-certified team ensuring efficient delivery.
-      Certified engineers across major vendors:
-      </p>
-
-      <ul>
-        <li>Cisco: CCNA, CCNP</li>
-        <li>HPE-Aruba: ACP-CA, ACSA, ACSP</li>
-        <li>Ruijie: RCNA, RCNP</li>
-        <li>Microsoft: MCSA</li>
-        <li>Fortinet: FCA, FCF</li>
-      </ul>
-    </div>
-
-    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=500&q=60" width="400">
-  </div>
-</div>
+</section>
 
 </body>
 </html>
