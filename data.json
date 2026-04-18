@@ -1,14 +1,9 @@
 {
   "customers": [
-    "Foxconn",
-    "Wistron",
-    "Qisda",
-    "Cooler Master"
+    {"name":"Foxconn","img":"images/foxconn.png"}
   ],
   "partners": [
-    "Cisco",
-    "Dell",
-    "Huawei",
-    "HPE"
+    {"name":"Cisco","img":"images/cisco.png"},
+    {"name":"Dell","img":"images/dell.png"}
   ]
 }
