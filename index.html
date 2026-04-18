@@ -1,259 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inecoliv</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inecoliv | Global ICT Solution Provider</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #d32f2f;
+            --primary-dark: #b71c1c;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --bg-light: #f9f9fb;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
 
-<style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); line-height: 1.6; background-color: var(--white); }
 
-* {margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+        /* Navbar */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: var(--white);
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-area b { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--primary); letter-spacing: 1px; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; margin-left: 30px; transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
 
-body {background:#f5f5f5;}
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80') center/cover;
+            display: flex; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 20px;
+        }
+        .hero h1 { font-family: 'Poppins', sans-serif; font-size: 3.5rem; margin-bottom: 15px; }
+        .hero p { font-size: 1.2rem; font-weight: 300; opacity: 0.9; }
 
-.navbar{
-background:#c40000;color:#fff;
-display:flex;justify-content:space-between;
-padding:15px 50px;align-items:center;
-}
+        /* General Section Styling */
+        section { padding: 80px 8%; }
+        h2 { font-family: 'Poppins', sans-serif; font-size: 2.2rem; text-align: center; margin-bottom: 50px; position: relative; }
+        h2::after { content: ''; width: 60px; height: 4px; background: var(--primary); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
 
-.nav-left{display:flex;align-items:center;}
-.nav-left img{height:40px;margin-right:10px;}
+        /* Services Cards */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .card { 
+            background: var(--white); border-radius: 12px; overflow: hidden; 
+            transition: var(--transition); box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card h4 { padding: 20px; text-align: center; font-family: 'Poppins', sans-serif; }
 
-.nav-right a{
-color:white;margin-left:20px;text-decoration:none;
-}
+        /* Partners/Logos */
+        .logo-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center; }
+        .logo-box { width: 160px; filter: grayscale(100%); opacity: 0.6; transition: var(--transition); }
+        .logo-box:hover { filter: grayscale(0%); opacity: 1; }
+        .logo-box img { width: 100%; height: auto; }
 
-.hero{
-height:70vh;
-background:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80') center/cover;
-display:flex;justify-content:center;align-items:center;
-color:white;text-align:center;
-}
+        /* Staff Section */
+        .staff-container { display: flex; align-items: center; gap: 60px; background: var(--bg-light); border-radius: 20px; padding: 50px; }
+        .staff-text { flex: 1; }
+        .staff-img { flex: 1; border-radius: 15px; overflow: hidden; box-shadow: 20px 20px 0px var(--primary); }
+        .staff-img img { width: 100%; display: block; }
+        .cert-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .cert-item { background: #fff; padding: 10px; border-radius: 8px; font-size: 0.9rem; border-left: 4px solid var(--primary); }
 
-.section{padding:60px 80px;text-align:center;}
-.section h2{margin-bottom:30px;}
+        /* Footer */
+        footer { background: #1a1a1a; color: #fff; padding: 60px 8% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h3 { color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', sans-serif; }
+        .footer-col p { opacity: 0.7; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
+        .footer-col p:hover { opacity: 1; color: var(--primary); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 0.8rem; opacity: 0.5; }
 
-.cards{
-display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
-}
-
-.card{
-background:white;width:250px;border-radius:10px;
-overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-.card img{
-width:100%;height:150px;object-fit:cover;
-}
-
-.card h4{padding:15px;}
-
-.logo-grid{
-display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
-}
-
-.logo-box{
-background:white;padding:20px;border-radius:10px;
-width:150px;height:80px;display:flex;
-align-items:center;justify-content:center;
-}
-
-.logo-box img{max-width:100%;max-height:60px;}
-
-.staff{
-display:flex;justify-content:space-between;
-align-items:center;gap:50px;text-align:left;
-}
-
-.staff img{width:400px;border-radius:10px;}
-
-.footer{
-background:#c40000;color:white;padding:40px;
-}
-
-.footer-columns{
-display:flex;justify-content:space-between;flex-wrap:wrap;
-}
-
-.footer-bottom{text-align:center;margin-top:20px;}
-
-</style>
+        @media (max-width: 768px) {
+            .staff-container { flex-direction: column; text-align: center; }
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-<div class="nav-left">
-<img src="https://i.imgur.com/8Km9tLL.png">
-<div>
-<b>INECOLIV</b><br>
-<small>GLOBAL ICT SOLUTION PROVIDER</small>
-</div>
-</div>
+    <nav class="navbar">
+        <div class="logo-area">
+            <img src="https://i.imgur.com/8Km9tLL.png" alt="Logo" style="height: 45px;">
+            <div>
+                <b>INECOLIV</b><br>
+                <small style="font-size: 10px; color: var(--text-light); font-weight: bold; letter-spacing: 1px;">GLOBAL ICT SOLUTIONS</small>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
 
-<div class="nav-right">
-<a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">Services</a>
-<a href="#">Contact</a>
-</div>
-</div>
+    <header class="hero">
+        <div>
+            <h1>Advancing Global Connectivity</h1>
+            <p>Enterprise-grade IT Infrastructure, Network Security & Systems Integration</p>
+        </div>
+    </header>
 
-<!-- HERO -->
-<div class="hero">
-<div>
-<h1>INECOLIV – Reliable IT Solutions</h1>
-<p>Networking, Security & Infrastructure for modern businesses</p>
-</div>
-</div>
+    <section>
+        <h2>About Inecoliv</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--text-light); font-size: 1.1rem;">
+            <p>Founded in 2024 and headquartered in Chennai, <b>Inecoliv Technology India Pvt Ltd</b> forms a vital link in a global tech network spanning China and Vietnam. We bridge the gap between complex technology and business efficiency.</p>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section class="section">
-<h2>About Inecoliv</h2>
+    <section style="background: var(--bg-light);">
+        <h2>Services & Solutions</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?auto=format&fit=crop&w=500&q=80" alt="Fiber">
+                <h4>Fiber Infrastructure</h4>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&q=80" alt="Security">
+                <h4>Network Security</h4>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80" alt="Storage">
+                <h4>Server & Storage</h4>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1557597774-9d2739f85a94?auto=format&fit=crop&w=500&q=80" alt="Surveillance">
+                <h4>Surveillance</h4>
+            </div>
+        </div>
+    </section>
 
-<p>Inecoliv Technology India Pvt Ltd, established in 2024 in Chennai,
-operates as part of a global network with presence in China and Vietnam.</p><br>
+    <section>
+        <h2>Technology Partners</h2>
+        <div class="logo-grid">
+            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" alt="Cisco"></div>
+            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg" alt="Fortinet"></div>
+            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg" alt="Dell"></div>
+            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg" alt="Aruba"></div>
+            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg" alt="VMware"></div>
+        </div>
+    </section>
 
-<p>We focus on IT product sales and services, including networking,
-security, infrastructure, and system integration.</p><br>
+    <section>
+        <div class="staff-container">
+            <div class="staff-text">
+                <h2 style="text-align: left; margin-bottom: 20px;">Staffing Expertise</h2>
+                <p style="color: var(--primary); font-weight: bold; font-size: 1.5rem; margin-bottom: 20px;">+80 Professionals Worldwide</p>
+                <p style="color: var(--text-light); margin-bottom: 20px;">Our team holds industry-leading certifications to ensure your infrastructure is managed by experts.</p>
+                <div class="cert-list">
+                    <div class="cert-item"><b>Cisco:</b> CCNA, CCNP</div>
+                    <div class="cert-item"><b>HPE-Aruba:</b> ACSP, ACSA</div>
+                    <div class="cert-item"><b>Fortinet:</b> FCA, FCF</div>
+                    <div class="cert-item"><b>Microsoft:</b> MCSA</div>
+                </div>
+            </div>
+            <div class="staff-img">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team">
+            </div>
+        </div>
+    </section>
 
-<p>Our goal is to deliver reliable, scalable, and enterprise-ready solutions
-tailored to modern business needs.</p>
-
-</section>
-
-<!-- SERVICES -->
-<section class="section">
-<h2>Services & Solutions</h2>
-
-<div class="cards">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80">
-<h4>Fiber Infrastructure</h4>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=800&q=80">
-<h4>Network Security</h4>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80">
-<h4>Server & Storage</h4>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1591696331111-ef9586a5b17c?auto=format&fit=crop&w=800&q=80">
-<h4>Surveillance</h4>
-</div>
-
-</div>
-</section>
-
-<!-- FEATURED CUSTOMER -->
-<section class="section">
-<h2>Featured Customers</h2>
-
-<div class="logo-grid">
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Foxconn.svg">
-</div>
-</div>
-
-</section>
-
-<!-- PARTNERS -->
-<section class="section">
-<h2>Technology Partners</h2>
-
-<div class="logo-grid">
-
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg">
-</div>
-
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Hewlett_Packard_Enterprise_logo.svg">
-</div>
-
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg">
-</div>
-
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg">
-</div>
-
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg">
-</div>
-
-<div class="logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg">
-</div>
-
-</div>
-</section>
-
-<!-- STAFF -->
-<section class="section staff">
-
-<div>
-<h2>Staffing Size</h2>
-<h3 style="color:red;">+80 people including India and Overseas</h3>
-
-<p><b>Certifications:</b></p>
-<p>Cisco: CCNA, CCNP</p>
-<p>HPE-Aruba: ACP-CA, ACSA, ACSP</p>
-<p>Ruijie: RCNA, RCNP</p>
-<p>Microsoft: MCSA</p>
-<p>Fortinet: FCA, FCF</p>
-</div>
-
-<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80">
-
-</section>
-
-<!-- FOOTER -->
-<div class="footer">
-
-<div class="footer-columns">
-
-<div>
-<h3>Inecoliv</h3>
-<p>Global ICT Solution Provider</p>
-</div>
-
-<div>
-<h3>Products</h3>
-<p>Switch</p>
-<p>Router</p>
-<p>Firewall</p>
-</div>
-
-<div>
-<h3>Services</h3>
-<p>Network</p>
-<p>Security</p>
-<p>Infrastructure</p>
-</div>
-
-<div>
-<h3>Contact</h3>
-<p>Chennai, India</p>
-<p>info@inecoliv.com</p>
-</div>
-
-</div>
-
-<div class="footer-bottom">
-© 2026 Inecoliv Technology India Pvt Ltd
-</div>
-
-</div>
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Inecoliv</h3>
+                <p>Leading the way in global ICT solutions with precision and reliability.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Products</h3>
+                <p>Core Switches</p>
+                <p>Enterprise Routers</p>
+                <p>Next-Gen Firewalls</p>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <p>Network Design</p>
+                <p>Cyber Security</p>
+                <p>Data Center Infrastructure</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>📍 Chennai, India</p>
+                <p>📧 info@inecoliv.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Inecoliv Technology India Pvt Ltd. All Rights Reserved.
+        </div>
+    </footer>
 
 </body>
 </html>
