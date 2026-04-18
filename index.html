@@ -16,16 +16,10 @@
       align-items:center;
     }
 
-    .logo {
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
+    .logo { display:flex; align-items:center; gap:10px; }
     .logo img { height:40px; }
 
     .menu { display:flex; gap:25px; }
-
     .menu a { color:white; text-decoration:none; }
 
     .hero {
@@ -67,6 +61,64 @@
       max-width:80%;
       max-height:80%;
     }
+
+    /* STAFF SECTION */
+    .staff {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:40px;
+      padding:60px;
+    }
+
+    .staff-text {
+      max-width:500px;
+      text-align:left;
+    }
+
+    .staff img {
+      width:400px;
+      border-radius:8px;
+    }
+
+    /* FOOTER */
+    footer {
+      background:#c1121f;
+      color:white;
+      padding:40px;
+    }
+
+    .footer-grid {
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:30px;
+    }
+
+    .footer-col {
+      max-width:300px;
+    }
+
+    .footer-col h3 {
+      margin-bottom:10px;
+    }
+
+    .footer-col a {
+      display:block;
+      color:white;
+      text-decoration:none;
+      margin:5px 0;
+      font-size:14px;
+    }
+
+    .footer-bottom {
+      margin-top:30px;
+      border-top:1px solid rgba(255,255,255,0.3);
+      padding-top:15px;
+      text-align:center;
+      font-size:14px;
+    }
+
   </style>
 </head>
 
@@ -109,9 +161,7 @@
 <section class="section">
   <h2>Featured Customers</h2>
   <div class="grid">
-    <div class="box">
-      <img src="https://logo.clearbit.com/foxconn.com">
-    </div>
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Foxconn_logo.svg"></div>
   </div>
 </section>
 
@@ -119,16 +169,75 @@
 <section class="section">
   <h2>Partners</h2>
   <div class="grid">
-
-    <div class="box"><img src="https://logo.clearbit.com/cisco.com"></div>
-    <div class="box"><img src="https://logo.clearbit.com/dell.com"></div>
-    <div class="box"><img src="https://logo.clearbit.com/hpe.com"></div>
-    <div class="box"><img src="https://logo.clearbit.com/huawei.com"></div>
-    <div class="box"><img src="https://logo.clearbit.com/arubanetworks.com"></div>
-    <div class="box"><img src="https://logo.clearbit.com/ruijienetworks.com"></div>
-
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg"></div>
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg"></div>
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Hewlett_Packard_Enterprise_logo.svg"></div>
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Huawei_Logo.svg"></div>
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Aruba_Networks_logo.svg"></div>
+    <div class="box"><img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Ruijie_Networks_logo.svg"></div>
   </div>
 </section>
+
+<!-- STAFF -->
+<section class="staff">
+  <div class="staff-text">
+    <h2>Staffing Size</h2>
+    <h3 style="color:red;">+80 people</h3>
+
+    <p>
+    We have a professional project management team with PMP and ISO certifications.
+    Our technical team holds certifications:
+    </p>
+
+    <p>
+    Cisco: CCNA, CCNP<br>
+    HPE-Aruba: ACP-CA, ACSA, ACSP<br>
+    Ruijie: RCNA, RCNP<br>
+    Microsoft: MCSA<br>
+    Fortinet: FCA, FCF
+    </p>
+  </div>
+
+  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+
+    <div class="footer-col">
+      <h3>Inecoliv</h3>
+      <p>Global ICT Solution Provider</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Products</h3>
+      <a href="#">Switch</a>
+      <a href="#">Router</a>
+      <a href="#">Firewall</a>
+      <a href="#">Server</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Services</h3>
+      <a href="#">Fiber Infrastructure</a>
+      <a href="#">Network Security</a>
+      <a href="#">Server & Storage</a>
+      <a href="#">Surveillance</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p>Chennai, India</p>
+      <p>Email: info@inecoliv.com</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Inecoliv Technology India Pvt Ltd
+  </div>
+</footer>
 
 </body>
 </html>
