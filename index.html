@@ -103,6 +103,7 @@
             background: var(--white); border-radius: 12px; overflow: hidden;
             box-shadow: var(--shadow-sm); transition: var(--transition);
             border: 1px solid var(--border); display: flex; flex-direction: column;
+            height: 100%;
         }
         .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: transparent; }
         .service-img-wrapper { height: 220px; overflow: hidden; }
@@ -112,14 +113,10 @@
 
         /* --- Technology Partners --- */
         .partner-grid {
-            /* Adjusted spacing to accommodate bigger logos */
             display: flex; flex-wrap: wrap; gap: 50px; justify-content: center; align-items: center;
         }
         .partner-logo {
-            /* Increased height and width so small logos scale up nicely */
-            height: 75px; 
-            width: 160px;
-            filter: grayscale(100%) opacity(0.6); transition: var(--transition);
+            height: 75px; width: 160px; filter: grayscale(100%) opacity(0.6); transition: var(--transition);
             display: flex; align-items: center; justify-content: center;
         }
         .partner-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.08); }
@@ -229,20 +226,28 @@
             <div class="divider"></div>
         </div>
         <div class="service-grid">
+            
             <a href="fiber.html" style="text-decoration: none; color: inherit;">
                 <div class="service-card">
                     <div class="service-img-wrapper"><img src="fiber.jpg" alt="Fiber Optic Infrastructure"></div>
                     <h4>Fiber Optic Infrastructure</h4>
                 </div>
             </a>
-            <div class="service-card">
-                <div class="service-img-wrapper"><img src="rack.jpg" alt="Rack Infrastructure"></div>
-                <h4>Rack Infrastructure</h4>
-            </div>
-            <div class="service-card">
-                <div class="service-img-wrapper"><img src="server-room.jpg" alt="Server Room"></div>
-                <h4>Server Room</h4>
-            </div>
+            
+            <a href="fiber.html" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <div class="service-img-wrapper"><img src="rack.jpg" alt="Rack Infrastructure"></div>
+                    <h4>Rack Infrastructure</h4>
+                </div>
+            </a>
+            
+            <a href="fiber.html" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <div class="service-img-wrapper"><img src="server-room.jpg" alt="Server Room"></div>
+                    <h4>Server Room</h4>
+                </div>
+            </a>
+
             <div class="service-card">
                 <div class="service-img-wrapper"><img src="network-security.jpg" alt="Network Systems, Security"></div>
                 <h4>Network Systems, Security</h4>
