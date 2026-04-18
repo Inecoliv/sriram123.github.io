@@ -59,19 +59,50 @@
 <body>
 
 <!-- NAV -->
-<nav>
+<nav style="background:#c1121f;color:white;padding:10px 30px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000;">
+
+  <!-- LEFT -->
   <div style="display:flex;align-items:center;gap:10px;">
     <img src="logo.png" height="50">
-    <span style="font-weight:bold;">INECOLIV</span>
+    <b>INECOLIV</b>
   </div>
 
-  <div>
-    <a href="#">Home</a>
-    <a href="#">Services</a>
-    <a href="#">Contact</a>
+  <!-- MENU -->
+  <div style="display:flex;align-items:center;gap:20px;">
+
+    <a href="index.html" style="color:white;">Home</a>
+
+    <a href="products.html" style="color:white;">Products</a>
+
+    <!-- DROPDOWN -->
+    <div style="position:relative;">
+      <span style="cursor:pointer;">Services & Solutions ▾</span>
+
+      <div style="display:none;position:absolute;background:white;color:black;padding:10px;top:30px;min-width:200px;"
+           onmouseover="this.style.display='block'"
+           onmouseout="this.style.display='none'"
+           id="dropdown">
+
+        <a href="services.html">IT Infrastructure</a><br><br>
+        <a href="services.html">Network & Security</a><br><br>
+        <a href="services.html">Server & Storage</a><br>
+      </div>
+    </div>
+
+    <a href="contact.html" style="color:white;background:#ff4d4d;padding:8px 15px;border-radius:5px;">Contact Us</a>
+
   </div>
+
 </nav>
 
+<script>
+document.querySelector("nav div div span").onmouseover = function(){
+  document.getElementById("dropdown").style.display = "block";
+};
+document.getElementById("dropdown").onmouseleave = function(){
+  this.style.display = "none";
+};
+</script>
 <!-- HERO -->
 <section class="hero">
   <h1>Inecoliv Technology India Pvt Ltd</h1>
