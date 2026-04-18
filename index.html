@@ -95,20 +95,23 @@
         .stat-box span { font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
         .about-image img { width: 100%; border-radius: 12px; box-shadow: var(--shadow-md); }
 
-        /* --- Services Section --- */
-        .service-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
+        /* --- Services & Products Grid Styles --- */
+        .grid-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
         }
-        .service-card {
+        .card {
             background: var(--white); border-radius: 12px; overflow: hidden;
             box-shadow: var(--shadow-sm); transition: var(--transition);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border); display: flex; flex-direction: column;
+            text-decoration: none; color: inherit; /* Makes the whole card clickable for Products */
         }
-        .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: transparent; }
-        .service-img-wrapper { height: 220px; overflow: hidden; }
-        .service-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .service-card:hover img { transform: scale(1.08); }
-        .service-card h4 { padding: 25px 20px; text-align: center; font-size: 1.25rem; border-top: 3px solid var(--primary); }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: transparent; }
+        .card-img-wrapper { height: 200px; overflow: hidden; }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .card:hover img { transform: scale(1.08); }
+        .card h4 { padding: 25px 20px; text-align: center; font-size: 1.2rem; border-top: 3px solid var(--primary); margin: 0; }
+        
+        .product-card h4 { border-top: 3px solid #1f2937; } /* Differentiate product cards slightly */
 
         /* --- Technology Partners --- */
         .partner-grid {
@@ -178,6 +181,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="products.html">Products</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -222,35 +226,86 @@
             <h2>Services & Solutions</h2>
             <div class="divider"></div>
         </div>
-        <div class="service-grid">
-            <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?auto=format&fit=crop&w=600&q=80" alt="Fiber Infrastructure">
+        <div class="grid-container">
+            
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80" alt="Network Systems, Security">
                 </div>
-                <h4>Fiber Infrastructure</h4>
+                <h4>Network Systems, Security</h4>
             </div>
-            <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80" alt="Network Security">
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?auto=format&fit=crop&w=600&q=80" alt="Enterprise Wi-Fi System">
                 </div>
-                <h4>Network Security</h4>
+                <h4>Enterprise Wi-Fi System</h4>
             </div>
-            <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Server & Storage">
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Server and Storage Systems">
                 </div>
-                <h4>Server & Storage</h4>
+                <h4>Server and Storage Systems</h4>
             </div>
-            <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Enterprise Surveillance Systems">
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1557597774-9d2739f85a94?auto=format&fit=crop&w=600&q=80" alt="Surveillance Camera System">
                 </div>
-                <h4>Surveillance</h4>
+                <h4>Surveillance Camera System</h4>
             </div>
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e3b48?auto=format&fit=crop&w=600&q=80" alt="Access Control System">
+                </div>
+                <h4>Access Control System</h4>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Reliable IT Outsourcing Services">
+                </div>
+                <h4>Reliable IT Outsourcing Services</h4>
+            </div>
+
         </div>
     </section>
 
-    <section class="section">
+    <section id="products" class="section">
+        <div class="section-header">
+            <h2>Our Core Products</h2>
+            <div class="divider"></div>
+            <p style="margin-top: 20px; color: var(--text-body);">Click on any category to view our full product catalog.</p>
+        </div>
+        <div class="grid-container">
+            
+            <a href="products.html" class="card product-card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80" alt="Switches & Routers">
+                </div>
+                <h4>Enterprise Switches & Routers</h4>
+            </a>
+
+            <a href="products.html" class="card product-card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=600&q=80" alt="Firewall Products">
+                </div>
+                <h4>Next-Gen Firewalls</h4>
+            </a>
+
+            <a href="products.html" class="card product-card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1508344928928-7677b136fccb?auto=format&fit=crop&w=600&q=80" alt="Wireless Access Points">
+                </div>
+                <h4>Wireless Access Points</h4>
+            </a>
+
+        </div>
+    </section>
+
+    <section class="section bg-gray">
         <div class="section-header">
             <h2>Technology Partners</h2>
             <div class="divider"></div>
@@ -260,12 +315,12 @@
             <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg" alt="Fortinet"></div>
             <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg" alt="Dell"></div>
             
-            <div class="partner-logo"><img src="https://cdn.worldvectorlogo.com/logos/aruba-networks.svg" alt="Aruba Networks"></div>
-            <div class="partner-logo"><img src="https://cdn.worldvectorlogo.com/logos/vmware-1.svg" alt="VMware"></div>
+            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg" alt="Aruba Networks"></div>
+            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg" alt="VMware"></div>
         </div>
     </section>
 
-    <section class="section bg-gray">
+    <section class="section">
         <div class="staff-container">
             <div class="staff-content">
                 <h2>+80 Professionals Globally</h2>
@@ -295,19 +350,19 @@
             <div class="footer-col">
                 <h4>Core Products</h4>
                 <ul>
-                    <li><a href="#">Switching & Routing</a></li>
-                    <li><a href="#">Wireless Access Points</a></li>
-                    <li><a href="#">Next-Gen Firewalls</a></li>
-                    <li><a href="#">Hyperconverged Infra</a></li>
+                    <li><a href="products.html">Switching & Routing</a></li>
+                    <li><a href="products.html">Wireless Access Points</a></li>
+                    <li><a href="products.html">Next-Gen Firewalls</a></li>
+                    <li><a href="products.html">Hyperconverged Infra</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Key Services</h4>
                 <ul>
-                    <li><a href="#">Network Architecture</a></li>
-                    <li><a href="#">Cybersecurity Audits</a></li>
-                    <li><a href="#">Infrastructure Management</a></li>
-                    <li><a href="#">System Integration</a></li>
+                    <li><a href="#services">Network Architecture</a></li>
+                    <li><a href="#services">Cybersecurity Audits</a></li>
+                    <li><a href="#services">Infrastructure Management</a></li>
+                    <li><a href="#services">System Integration</a></li>
                 </ul>
             </div>
             <div class="footer-col">
