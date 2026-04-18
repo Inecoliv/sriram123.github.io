@@ -7,162 +7,76 @@
 
 <style>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+* {margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+
+body {background:#f5f5f5;}
+
+.navbar{
+background:#c40000;color:#fff;
+display:flex;justify-content:space-between;
+padding:15px 50px;align-items:center;
 }
 
-body {
-  background: #f5f5f5;
+.nav-left{display:flex;align-items:center;}
+.nav-left img{height:40px;margin-right:10px;}
+
+.nav-right a{
+color:white;margin-left:20px;text-decoration:none;
 }
 
-/* NAVBAR */
-.navbar {
-  background: #c40000;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 50px;
+.hero{
+height:70vh;
+background:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80') center/cover;
+display:flex;justify-content:center;align-items:center;
+color:white;text-align:center;
 }
 
-.nav-left {
-  display: flex;
-  align-items: center;
+.section{padding:60px 80px;text-align:center;}
+.section h2{margin-bottom:30px;}
+
+.cards{
+display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
 }
 
-.nav-left img {
-  height: 40px;
-  margin-right: 10px;
+.card{
+background:white;width:250px;border-radius:10px;
+overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.nav-right a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-  font-weight: 500;
+.card img{
+width:100%;height:150px;object-fit:cover;
 }
 
-/* HERO */
-.hero {
-  height: 70vh;
-  background: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80') center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
+.card h4{padding:15px;}
+
+.logo-grid{
+display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
 }
 
-.hero h1 {
-  font-size: 40px;
+.logo-box{
+background:white;padding:20px;border-radius:10px;
+width:150px;height:80px;display:flex;
+align-items:center;justify-content:center;
 }
 
-.hero p {
-  margin-top: 10px;
+.logo-box img{max-width:100%;max-height:60px;}
+
+.staff{
+display:flex;justify-content:space-between;
+align-items:center;gap:50px;text-align:left;
 }
 
-/* SECTIONS */
-.section {
-  padding: 60px 80px;
-  text-align: center;
+.staff img{width:400px;border-radius:10px;}
+
+.footer{
+background:#c40000;color:white;padding:40px;
 }
 
-.section h2 {
-  margin-bottom: 30px;
+.footer-columns{
+display:flex;justify-content:space-between;flex-wrap:wrap;
 }
 
-/* CARDS */
-.cards {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.card {
-  background: white;
-  width: 250px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.card h4 {
-  padding: 15px;
-}
-
-/* LOGOS */
-.logo-grid {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.logo-box {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 150px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-box img {
-  max-width: 100%;
-  max-height: 60px;
-}
-
-/* STAFF */
-.staff {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 50px;
-  text-align: left;
-}
-
-.staff img {
-  width: 400px;
-  border-radius: 10px;
-}
-
-/* FOOTER */
-.footer {
-  background: #c40000;
-  color: white;
-  padding: 40px;
-}
-
-.footer-columns {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer h3 {
-  margin-bottom: 10px;
-}
-
-.footer p {
-  margin: 5px 0;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-}
+.footer-bottom{text-align:center;margin-top:20px;}
 
 </style>
 </head>
@@ -171,174 +85,173 @@ body {
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="nav-left">
-    <img src="https://i.imgur.com/8Km9tLL.png">
-    <div>
-      <b>INECOLIV</b><br>
-      <small>GLOBAL ICT SOLUTION PROVIDER</small>
-    </div>
-  </div>
+<div class="nav-left">
+<img src="https://i.imgur.com/8Km9tLL.png">
+<div>
+<b>INECOLIV</b><br>
+<small>GLOBAL ICT SOLUTION PROVIDER</small>
+</div>
+</div>
 
-  <div class="nav-right">
-    <a href="#">Home</a>
-    <a href="#">Products</a>
-    <a href="#">Services</a>
-    <a href="#">Contact</a>
-  </div>
+<div class="nav-right">
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">Services</a>
+<a href="#">Contact</a>
+</div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <div>
-    <h1>INECOLIV – Reliable IT Solutions</h1>
-    <p>Networking, Security & Infrastructure for modern businesses</p>
-  </div>
+<div>
+<h1>INECOLIV – Reliable IT Solutions</h1>
+<p>Networking, Security & Infrastructure for modern businesses</p>
+</div>
 </div>
 
 <!-- ABOUT -->
 <section class="section">
-  <h2>About Inecoliv</h2>
-  <p>
-    Inecoliv Technology India Pvt Ltd, established in 2024 in Chennai,
-    operates as part of a global network with presence in China and Vietnam.
-  </p><br>
-  <p>
-    We focus on IT product sales and services, including networking,
-    security, infrastructure, and system integration.
-  </p><br>
-  <p>
-    Our goal is to deliver reliable, scalable, and enterprise-ready solutions
-    tailored to modern business needs.
-  </p>
+<h2>About Inecoliv</h2>
+
+<p>Inecoliv Technology India Pvt Ltd, established in 2024 in Chennai,
+operates as part of a global network with presence in China and Vietnam.</p><br>
+
+<p>We focus on IT product sales and services, including networking,
+security, infrastructure, and system integration.</p><br>
+
+<p>Our goal is to deliver reliable, scalable, and enterprise-ready solutions
+tailored to modern business needs.</p>
+
 </section>
 
 <!-- SERVICES -->
 <section class="section">
-  <h2>Services & Solutions</h2>
+<h2>Services & Solutions</h2>
 
-  <div class="cards">
+<div class="cards">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80">
-      <h4>Fiber Infrastructure</h4>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80">
+<h4>Fiber Infrastructure</h4>
+</div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=800&q=80">
-      <h4>Network Security</h4>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=800&q=80">
+<h4>Network Security</h4>
+</div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80">
-      <h4>Server & Storage</h4>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80">
+<h4>Server & Storage</h4>
+</div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80">
-      <h4>Surveillance</h4>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1591696331111-ef9586a5b17c?auto=format&fit=crop&w=800&q=80">
+<h4>Surveillance</h4>
+</div>
 
-  </div>
+</div>
 </section>
 
 <!-- FEATURED CUSTOMER -->
 <section class="section">
-  <h2>Featured Customers</h2>
+<h2>Featured Customers</h2>
 
-  <div class="logo-grid">
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Foxconn.svg">
-    </div>
-  </div>
+<div class="logo-grid">
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Foxconn.svg">
+</div>
+</div>
+
 </section>
 
 <!-- PARTNERS -->
 <section class="section">
-  <h2>Technology Partners</h2>
+<h2>Technology Partners</h2>
 
-  <div class="logo-grid">
+<div class="logo-grid">
 
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg">
-    </div>
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg">
+</div>
 
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Hewlett_Packard_Enterprise_logo.svg">
-    </div>
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Hewlett_Packard_Enterprise_logo.svg">
+</div>
 
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg">
-    </div>
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg">
+</div>
 
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg">
-    </div>
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg">
+</div>
 
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg">
-    </div>
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg">
+</div>
 
-    <div class="logo-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg">
-    </div>
+<div class="logo-box">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg">
+</div>
 
-  </div>
+</div>
 </section>
 
 <!-- STAFF -->
 <section class="section staff">
 
-  <div>
-    <h2>Staffing Size</h2>
-    <h3 style="color:red;">+80 people including India and Overseas</h3>
+<div>
+<h2>Staffing Size</h2>
+<h3 style="color:red;">+80 people including India and Overseas</h3>
 
-    <p><b>Certifications:</b></p>
-    <p>Cisco: CCNA, CCNP</p>
-    <p>HPE-Aruba: ACP-CA, ACSA, ACSP</p>
-    <p>Ruijie: RCNA, RCNP</p>
-    <p>Microsoft: MCSA</p>
-    <p>Fortinet: FCA, FCF</p>
-  </div>
+<p><b>Certifications:</b></p>
+<p>Cisco: CCNA, CCNP</p>
+<p>HPE-Aruba: ACP-CA, ACSA, ACSP</p>
+<p>Ruijie: RCNA, RCNP</p>
+<p>Microsoft: MCSA</p>
+<p>Fortinet: FCA, FCF</p>
+</div>
 
-  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80">
 
 </section>
 
 <!-- FOOTER -->
 <div class="footer">
 
-  <div class="footer-columns">
+<div class="footer-columns">
 
-    <div>
-      <h3>Inecoliv</h3>
-      <p>Global ICT Solution Provider</p>
-    </div>
+<div>
+<h3>Inecoliv</h3>
+<p>Global ICT Solution Provider</p>
+</div>
 
-    <div>
-      <h3>Products</h3>
-      <p>Switch</p>
-      <p>Router</p>
-      <p>Firewall</p>
-    </div>
+<div>
+<h3>Products</h3>
+<p>Switch</p>
+<p>Router</p>
+<p>Firewall</p>
+</div>
 
-    <div>
-      <h3>Services</h3>
-      <p>Network</p>
-      <p>Security</p>
-      <p>Infrastructure</p>
-    </div>
+<div>
+<h3>Services</h3>
+<p>Network</p>
+<p>Security</p>
+<p>Infrastructure</p>
+</div>
 
-    <div>
-      <h3>Contact</h3>
-      <p>Chennai, India</p>
-      <p>info@inecoliv.com</p>
-    </div>
+<div>
+<h3>Contact</h3>
+<p>Chennai, India</p>
+<p>info@inecoliv.com</p>
+</div>
 
-  </div>
+</div>
 
-  <div class="footer-bottom">
-    © 2026 Inecoliv Technology India Pvt Ltd
-  </div>
+<div class="footer-bottom">
+© 2026 Inecoliv Technology India Pvt Ltd
+</div>
 
 </div>
 
