@@ -23,17 +23,20 @@
         /* Navbar */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; background: var(--white);
+            padding: 15px 8%; background: var(--white);
             position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-area b { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--primary); letter-spacing: 1px; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        /* Style to match previous logo appearance */
+        .logo-img { height: 50px; width: auto; object-fit: contain; }
+        
+        .logo-text b { font-family: 'Poppins', sans-serif; font-size: 1.4rem; color: #333; letter-spacing: 0.5px; line-height: 1; }
         .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 500; margin-left: 30px; transition: var(--transition); }
         .nav-links a:hover { color: var(--primary); }
 
         /* Hero Section */
         .hero {
-            height: 80vh;
+            height: 70vh;
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80') center/cover;
             display: flex; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 20px;
@@ -57,10 +60,9 @@
         .card h4 { padding: 20px; text-align: center; font-family: 'Poppins', sans-serif; }
 
         /* Partners/Logos */
-        .logo-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center; }
-        .logo-box { width: 160px; filter: grayscale(100%); opacity: 0.6; transition: var(--transition); }
-        .logo-box:hover { filter: grayscale(0%); opacity: 1; }
-        .logo-box img { width: 100%; height: auto; }
+        .logo-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 50px; align-items: center; }
+        .partner-logo { max-width: 140px; max-height: 60px; filter: grayscale(100%); opacity: 0.6; transition: var(--transition); }
+        .partner-logo:hover { filter: grayscale(0%); opacity: 1; }
 
         /* Staff Section */
         .staff-container { display: flex; align-items: center; gap: 60px; background: var(--bg-light); border-radius: 20px; padding: 50px; }
@@ -74,8 +76,7 @@
         footer { background: #1a1a1a; color: #fff; padding: 60px 8% 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
         .footer-col h3 { color: var(--primary); margin-bottom: 20px; font-family: 'Poppins', sans-serif; }
-        .footer-col p { opacity: 0.7; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
-        .footer-col p:hover { opacity: 1; color: var(--primary); }
+        .footer-col p { opacity: 0.7; margin-bottom: 10px; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 0.8rem; opacity: 0.5; }
 
         @media (max-width: 768px) {
@@ -89,10 +90,10 @@
 
     <nav class="navbar">
         <div class="logo-area">
-            <img src="https://i.imgur.com/8Km9tLL.png" alt="Logo" style="height: 45px;">
-            <div>
+            <img src="https://ecoliv.vn/wp-content/uploads/2022/03/logo-1.png" alt="Inecoliv Logo" class="logo-img">
+            <div class="logo-text">
                 <b>INECOLIV</b><br>
-                <small style="font-size: 10px; color: var(--text-light); font-weight: bold; letter-spacing: 1px;">GLOBAL ICT SOLUTIONS</small>
+                <small style="font-size: 10px; color: var(--text-light); font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Global ICT Solutions</small>
             </div>
         </div>
         <div class="nav-links">
@@ -142,11 +143,11 @@
     <section>
         <h2>Technology Partners</h2>
         <div class="logo-grid">
-            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" alt="Cisco"></div>
-            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg" alt="Fortinet"></div>
-            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg" alt="Dell"></div>
-            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg" alt="Aruba"></div>
-            <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg" alt="VMware"></div>
+            <img class="partner-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" alt="Cisco">
+            <img class="partner-logo" src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg" alt="Fortinet">
+            <img class="partner-logo" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg" alt="Dell">
+            <img class="partner-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg" alt="Aruba">
+            <img class="partner-logo" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg" alt="VMware">
         </div>
     </section>
 
