@@ -116,9 +116,10 @@
         }
         .partner-logo {
             height: 50px; filter: grayscale(100%) opacity(0.6); transition: var(--transition);
+            display: flex; align-items: center; justify-content: center;
         }
         .partner-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
-        .partner-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .partner-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
         /* --- Staffing & Expertise --- */
         .staff-container {
@@ -225,65 +226,39 @@
         </div>
         <div class="service-grid">
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8c?auto=format&fit=crop&w=600&q=80" alt="Fiber Optic Infrastructure">
-                </div>
+                <div class="service-img-wrapper"><img src="fiber.jpg" alt="Fiber Optic Infrastructure"></div>
                 <h4>Fiber Optic Infrastructure</h4>
             </div>
-            
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Rack Infrastructure">
-                </div>
+                <div class="service-img-wrapper"><img src="rack.jpg" alt="Rack Infrastructure"></div>
                 <h4>Rack Infrastructure</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Server Room">
-                </div>
+                <div class="service-img-wrapper"><img src="server-room.jpg" alt="Server Room"></div>
                 <h4>Server Room</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80" alt="Network Systems, Security">
-                </div>
+                <div class="service-img-wrapper"><img src="network-security.jpg" alt="Network Systems, Security"></div>
                 <h4>Network Systems, Security</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1614064641913-6b71f301ccbe?auto=format&fit=crop&w=600&q=80" alt="Enterprise Wi-Fi System">
-                </div>
+                <div class="service-img-wrapper"><img src="wifi.jpg" alt="Enterprise Wi-Fi System"></div>
                 <h4>Enterprise Wi-Fi System</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?auto=format&fit=crop&w=600&q=80" alt="Server and Storage Systems">
-                </div>
+                <div class="service-img-wrapper"><img src="server-storage.jpg" alt="Server and Storage Systems"></div>
                 <h4>Server and Storage Systems</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1557597774-9d2739f85a94?auto=format&fit=crop&w=600&q=80" alt="Surveillance Camera System">
-                </div>
+                <div class="service-img-wrapper"><img src="surveillance.jpg" alt="Surveillance Camera System"></div>
                 <h4>Surveillance Camera System</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=600&q=80" alt="Access Control System">
-                </div>
+                <div class="service-img-wrapper"><img src="access-control.jpg" alt="Access Control System"></div>
                 <h4>Access Control System</h4>
             </div>
-
             <div class="service-card">
-                <div class="service-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80" alt="Reliable IT Outsourcing Services">
-                </div>
+                <div class="service-img-wrapper"><img src="outsourcing.jpg" alt="Reliable IT Outsourcing Services"></div>
                 <h4>Reliable IT Outsourcing Services</h4>
             </div>
         </div>
@@ -295,21 +270,21 @@
             <div class="divider"></div>
         </div>
         <div class="partner-grid">
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" alt="Cisco"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Aruba_Networks_logo.svg" alt="HPE Aruba"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Fortinet_logo.svg" alt="Fortinet"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Palo_Alto_Networks_logo.svg" alt="Palo Alto"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Check_Point_logo_2022.svg" alt="Check Point"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/F5_Networks_logo.svg" alt="F5"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Citrix_logo_2021.svg" alt="Citrix"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg" alt="Dell"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Hewlett_Packard_Enterprise_logo.svg" alt="HPE"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Vmware.svg" alt="VMware"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" alt="HP"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Logitech_logo.svg" alt="Logitech"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Avaya_Logo.svg" alt="Avaya"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg" alt="Lenovo"></div>
-            <div class="partner-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/NetApp_logo.svg" alt="NetApp"></div>
+            <div class="partner-logo"><img src="cisco.png" alt="Cisco"></div>
+            <div class="partner-logo"><img src="aruba.png" alt="HPE Aruba"></div>
+            <div class="partner-logo"><img src="fortinet.png" alt="Fortinet"></div>
+            <div class="partner-logo"><img src="paloalto.png" alt="Palo Alto"></div>
+            <div class="partner-logo"><img src="checkpoint.png" alt="Check Point"></div>
+            <div class="partner-logo"><img src="f5.jpg" alt="F5"></div>
+            <div class="partner-logo"><img src="citrix.png" alt="Citrix"></div>
+            <div class="partner-logo"><img src="dell.png" alt="Dell"></div>
+            <div class="partner-logo"><img src="hpe.png" alt="HPE"></div>
+            <div class="partner-logo"><img src="vmware.png" alt="VMware"></div>
+            <div class="partner-logo"><img src="hp.png" alt="HP"></div>
+            <div class="partner-logo"><img src="logitech.png" alt="Logitech"></div>
+            <div class="partner-logo"><img src="avaya.png" alt="Avaya"></div>
+            <div class="partner-logo"><img src="Lenovo.jpg" alt="Lenovo"></div>
+            <div class="partner-logo"><img src="netapp.png" alt="NetApp"></div>
         </div>
     </section>
 
