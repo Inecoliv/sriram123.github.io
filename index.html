@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Inecoliv</title>
+  <title>Inecoliv Technology India Pvt Ltd</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,52 +11,86 @@
     nav {
       background:#c1121f;
       color:white;
-      padding:12px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 30px;
+    }
+
+    .logo-area {
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      gap:10px;
+    }
+
+    .logo-area img {
+      height:50px;
+    }
+
+    .logo-text {
+      font-size:12px;
+      color:#ffdede;
     }
 
     nav a {
       color:white;
-      text-decoration:none;
       margin-left:20px;
+      text-decoration:none;
+      font-size:14px;
     }
 
-    /* HERO SLIDER */
-    .hero-slider {
-      position: relative;
-      height: 400px;
-      background: #f5f5f5;
+    .menu {
       display:flex;
       align-items:center;
-      justify-content:center;
-      overflow:hidden;
     }
 
-    .slide {
+    /* DROPDOWN */
+    .dropdown {
+      position:relative;
+    }
+
+    .dropdown-content {
+      display:none;
       position:absolute;
+      background:white;
+      color:black;
+      top:30px;
+      min-width:200px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-content a {
+      display:block;
+      padding:10px;
+      color:black;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display:block;
+    }
+
+    .contact-btn {
+      background:#ff4d4d;
+      padding:8px 15px;
+      border-radius:5px;
+    }
+
+    /* HERO */
+    .hero {
+      padding:80px 20px;
       text-align:center;
-      opacity:0;
-      transition:0.8s;
-      width:80%;
+      background:#f4f4f4;
     }
 
-    .slide.active {
-      opacity:1;
-    }
-
-    .slide h1 {
+    .hero h1 {
       font-size:32px;
-      margin-bottom:15px;
     }
 
-    .slide p {
+    .hero p {
       color:#555;
-      font-size:16px;
     }
 
-    /* SECTIONS */
+    /* SECTION */
     .section {
       padding:60px 20px;
       text-align:center;
@@ -72,7 +106,7 @@
     .box {
       width:180px;
       height:100px;
-      border:1px solid #eee;
+      border:1px solid #ddd;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -84,8 +118,9 @@
     footer {
       background:#c1121f;
       color:white;
-      padding:30px;
+      padding:40px 20px;
     }
+
   </style>
 </head>
 
@@ -93,72 +128,98 @@
 
 <!-- NAVBAR -->
 <nav>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <img src="logo.png" height="50">
+  <div class="logo-area">
+    <img src="logo.png">
     <div>
-      <b>INECOLIV</b><br>
-      <small style="font-size:10px;">GLOBAL ICT SOLUTION PROVIDER</small>
+      <div><b>INECOLIV</b></div>
+      <div class="logo-text">GLOBAL ICT SOLUTION PROVIDER</div>
     </div>
   </div>
 
-  <div>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="services.html">Services & Solutions</a>
-    <a href="contact.html" style="background:#ff4d4d;padding:8px 15px;border-radius:5px;">Contact Us</a>
+  <div class="menu">
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+
+    <div class="dropdown">
+      <a href="#">Services & Solutions ▼</a>
+      <div class="dropdown-content">
+        <a href="#">Network Systems</a>
+        <a href="#">Enterprise Wi-Fi</a>
+        <a href="#">Server & Storage</a>
+        <a href="#">Security Systems</a>
+        <a href="#">IT Outsourcing</a>
+      </div>
+    </div>
+
+    <a href="#" class="contact-btn">Contact Us</a>
   </div>
 </nav>
 
-<!-- SLIDER -->
-<section class="hero-slider">
-  <div class="slide active">
-    <h1>INECOLIV – Reliable IT Solutions</h1>
-    <p>Delivering networking, security, and infrastructure solutions for modern businesses.</p>
-  </div>
-
-  <div class="slide">
-    <h1>Global Presence, Local Expertise</h1>
-    <p>Backed by operations in China and Vietnam, now expanding into India.</p>
-  </div>
-
-  <div class="slide">
-    <h1>Sales & Services Focus</h1>
-    <p>Providing end-to-end IT product sales and implementation services.</p>
-  </div>
+<!-- HERO -->
+<section class="hero">
+  <h1>INECOLIV – Reliable IT Solutions</h1>
+  <p>Delivering networking, security, and infrastructure solutions for modern businesses.</p>
 </section>
 
-<!-- INTRO -->
-<section class="section">
+<!-- ABOUT -->
+<section class="section" style="background:#f9f9f9;">
   <h2>About Inecoliv</h2>
-  <p style="max-width:800px;margin:auto;">
-    Established in 2024 in Chennai, Inecoliv Technology India Pvt Ltd is part of a broader international presence with operations in China and Vietnam. We bring global experience into the Indian market, focusing on delivering practical and scalable IT solutions.
-    <br><br>
-    Our core focus is on IT product sales and services, including networking, security, infrastructure, and system integration. By working with leading global technology brands, we ensure reliable, high-performance solutions tailored to modern business needs.
-    <br><br>
-    Our approach is simple — understand the requirement, design the right solution, and deliver with consistency and quality.
-  </p>
+
+  <div style="max-width:900px;margin:auto;text-align:left;line-height:1.8;color:#444;">
+
+    <p>
+      <b>Inecoliv Technology India Pvt Ltd</b>, established in 2024 in Chennai, is part of a broader international presence with operations in China and Vietnam. We bring global expertise into the Indian market, focusing on delivering structured, scalable, and reliable IT solutions.
+    </p>
+
+    <p>
+      Our core focus is on <b>IT product sales and services</b>, covering networking, security, infrastructure, and system integration. We combine the right technology with practical execution to solve real-world business challenges.
+    </p>
+
+    <p>
+      Through strong partnerships with leading technology vendors, we ensure access to <b>high-performance, secure, and future-ready solutions</b>.
+    </p>
+
+    <p>
+      Our approach is simple — <b>understand, design, and deliver</b> — with a commitment to quality, efficiency, and long-term reliability.
+    </p>
+
+  </div>
 </section>
 
 <!-- CUSTOMERS -->
 <section class="section">
   <h2>Featured Customers</h2>
   <p>We support enterprise customers with reliable IT infrastructure solutions.</p>
-  <div id="customers" class="grid"></div>
+
+  <div class="grid">
+    <div class="box">Foxconn</div>
+  </div>
 </section>
 
 <!-- PARTNERS -->
 <section class="section">
   <h2>Technology Partners</h2>
-  <p>We work with leading global technology brands.</p>
-  <div id="partners" class="grid"></div>
+  <p>We work with trusted global technology brands.</p>
+
+  <div class="grid">
+    <div class="box">Cisco</div>
+    <div class="box">HPE</div>
+    <div class="box">Aruba</div>
+    <div class="box">Fortinet</div>
+    <div class="box">Palo Alto</div>
+    <div class="box">Dell</div>
+    <div class="box">VMware</div>
+    <div class="box">Lenovo</div>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
+  <div style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;">
+
     <div>
       <img src="logo.png" width="120"><br><br>
-      GLOBAL ICT SOLUTION PROVIDER
+      <p>GLOBAL ICT SOLUTION PROVIDER</p>
     </div>
 
     <div>
@@ -166,6 +227,7 @@
       <p>Switch</p>
       <p>Router</p>
       <p>Firewall</p>
+      <p>Server & Storage</p>
     </div>
 
     <div>
@@ -173,41 +235,15 @@
       <p>Network Design</p>
       <p>Security</p>
       <p>Infrastructure</p>
+      <p>Support</p>
     </div>
+
   </div>
 
-  <hr>
+  <hr style="margin:20px 0;border:1px solid #fff;">
+
   <p style="text-align:center;">© 2026 Inecoliv Technology India Pvt Ltd</p>
 </footer>
-
-<!-- SCRIPT -->
-<script>
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-
-setInterval(() => {
-  slides[index].classList.remove("active");
-  index = (index + 1) % slides.length;
-  slides[index].classList.add("active");
-}, 3000);
-
-async function loadData() {
-  const res = await fetch('data.json');
-  const data = await res.json();
-
-  const c = document.getElementById('customers');
-  data.customers.forEach(item => {
-    c.innerHTML += `<div class="box">${item.name}</div>`;
-  });
-
-  const p = document.getElementById('partners');
-  data.partners.forEach(item => {
-    p.innerHTML += `<div class="box">${item.name}</div>`;
-  });
-}
-
-loadData();
-</script>
 
 </body>
 </html>
