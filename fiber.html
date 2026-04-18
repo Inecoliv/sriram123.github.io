@@ -1,20 +1,268 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Fiber Infrastructure</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiber Optic Infrastructure | Inecoliv</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c40000;
+            --primary-dark: #8b0000;
+            --text-dark: #1f2937;
+            --text-body: #4b5563;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; color: var(--text-dark); margin-bottom: 15px; }
+
+        /* --- Header & Navigation (Matches Homepage) --- */
+        .navbar {
+            background: var(--white); position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 15px 8%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm);
+        }
+        .brand-container { display: flex; align-items: center; text-decoration: none; }
+        .brand-container img { height: 50px; margin-right: 16px; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-name { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); line-height: 1.2; }
+        .brand-slogan { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; font-weight: 600; }
+
+        .nav-menu { display: flex; list-style: none; gap: 35px; }
+        .nav-menu a {
+            text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem;
+            transition: var(--transition); position: relative;
+        }
+        .nav-menu a:hover { color: var(--primary); }
+        .nav-menu a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: var(--primary); transition: var(--transition);
+        }
+        .nav-menu a:hover::after { width: 100%; }
+
+        /* --- Service Hero Banner --- */
+        .service-hero {
+            height: 50vh; margin-top: 80px;
+            background: linear-gradient(rgba(17, 24, 39, 0.6), rgba(17, 24, 39, 0.8)),
+                        url('fiber.jpg') center/cover no-repeat;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px; color: white;
+        }
+        .service-hero h1 { color: white; font-size: 3.5rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; }
+        .service-hero p { font-size: 1.2rem; font-weight: 400; opacity: 0.9; text-transform: uppercase; letter-spacing: 2px;}
+
+        /* --- Main Content Area --- */
+        .content-section { padding: 80px 15%; max-width: 1400px; margin: 0 auto; }
+        
+        .intro-text { text-align: center; font-size: 1.2rem; font-weight: 500; color: var(--text-dark); margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.9;}
+        
+        /* Highlight Boxes */
+        .highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .highlight-box { text-align: center; padding: 30px; background: var(--bg-light); border-radius: 12px; border-top: 4px solid var(--primary); }
+        .highlight-box h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; }
+
+        /* Article Formatting */
+        .article-block { margin-bottom: 50px; }
+        .article-block h2 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; }
+        .article-block h3 { font-size: 1.5rem; color: var(--primary); margin-top: 30px; margin-bottom: 15px; }
+        .article-block p { margin-bottom: 15px; font-size: 1.05rem; }
+        .article-block ul { margin-left: 20px; margin-bottom: 20px; }
+        .article-block li { margin-bottom: 10px; font-size: 1.05rem; }
+        .article-block li strong { color: var(--text-dark); }
+
+        /* CTA Section */
+        .cta-box { background-color: var(--text-dark); color: white; padding: 40px; text-align: center; border-radius: 12px; margin-top: 60px; }
+        .cta-box h3 { color: white; font-size: 1.8rem; }
+        .cta-box p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; }
+        .cta-button { display: inline-block; background: var(--primary); color: white; padding: 12px 30px; text-decoration: none; font-weight: 600; border-radius: 6px; transition: var(--transition); }
+        .cta-button:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* --- Footer (Matches Homepage) --- */
+        .footer { background-color: #111827; color: #9ca3af; padding: 80px 8% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px; }
+        .footer-brand { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .footer-brand img { height: 45px; background: white; padding: 4px; border-radius: 4px; }
+        .footer-brand h3 { color: white; font-size: 1.5rem; margin: 0; }
+        .footer-col h4 { color: white; font-size: 1.1rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #9ca3af; text-decoration: none; transition: var(--transition); }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #374151; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .content-section { padding: 50px 5%; }
+            .service-hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
 <body>
 
-<!-- SAME HEADER -->
+    <nav class="navbar">
+        <a href="index.html" class="brand-container">
+            <img src="logo.png" alt="Inecoliv Logo">
+            <div class="brand-text">
+                <span class="brand-name">Inecoliv Technology India Pvt Ltd</span>
+                <span class="brand-slogan">Global ICT Solutions</span>
+            </div>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-<div style="height:300px;background:url('https://images.unsplash.com/photo-1581091870622-2c9f6d8c52c2?auto=format&fit=crop&w=1200&q=60');background-size:cover;"></div>
+    <header class="service-hero">
+        <h1>Fiber Optic Infrastructure</h1>
+        <p>Consulting, Design, and Construction Services</p>
+    </header>
 
-<section style="padding:40px;max-width:900px;margin:auto;">
-<h2>Fiber Infrastructure</h2>
-<p>Enterprise fiber optic network solutions with high performance and scalability.</p>
-</section>
+    <section class="content-section">
+        
+        <p class="intro-text">
+            In today's digital age, information technology (IT) infrastructure plays a crucial role in ensuring the stable and efficient operation of organizations and businesses. IT infrastructure consulting, design, and construction services not only help build a solid foundation for technology systems but also optimize work performance and minimize risks.
+        </p>
+
+        <div class="highlight-grid">
+            <div class="highlight-box">
+                <h3>Copper & Fiber Cabling</h3>
+                <p>The core of network systems, ensuring high-speed data transmission.</p>
+            </div>
+            <div class="highlight-box">
+                <h3>Rack Infrastructure</h3>
+                <p>Managing network equipment, servers, and providing physical security.</p>
+            </div>
+            <div class="highlight-box">
+                <h3>Server Rooms</h3>
+                <p>A critical, climate-controlled foundation for all your IT systems.</p>
+            </div>
+        </div>
+
+        <div class="article-block">
+            <h2>1. The Core of the Network System</h2>
+            <p>With crucial elements such as copper cabling, fiber optic cables, rack cabinets, and server rooms, choosing a reputable IT infrastructure installation service will help your business improve connectivity, security, and system management.</p>
+            
+            <h3>1.1 Copper Cable Infrastructure</h3>
+            <p>Copper cables are a crucial component in IT infrastructure, especially in Local Area Network (LAN) systems. They are commonly used to connect devices within a company's internal network. While inexpensive and easy to install, copper cables have limited bandwidth and signal transmission speeds.</p>
+            <p>One of the key factors when designing a copper cabling infrastructure is identifying the right type of cable for the intended use. Common copper cable types such as Cat5e, Cat6, and Cat6a all have different data transmission speeds. To optimize network performance, choosing the right cable for the purpose is crucial.</p>
+
+            <h3>1.2 Fiber Optic Infrastructure</h3>
+            <p>Fiber optic cables have become a superior solution for network signal transmission, especially for large businesses or systems requiring high bandwidth. Unlike copper cables, fiber optic cables use light to transmit signals, minimizing interference and increasing data transmission speeds.</p>
+            <p>Fiber optic infrastructure is not only suitable for businesses requiring high network speeds, but it also allows your system to be easily expanded and upgraded in the future. Fiber optic cables are highly stable and less affected by environmental factors such as electromagnetic fields or water.</p>
+
+            <h3>1.3 Cable Trays</h3>
+            <p>Cable trays are an indispensable component of cable infrastructure systems. They protect cables from external impacts while keeping them neatly organized, facilitating maintenance and replacement. Cable trays are installed in spaces such as walls, ceilings, or under floors to ensure both aesthetics and safety. They can be made from various materials such as steel, plastic, or alloys, depending on the application requirements and installation environment.</p>
+        </div>
+
+        <div class="article-block">
+            <h2>2. Rack Infrastructure: Managing Network Equipment</h2>
+            <p>Rack cabinets are one of the crucial components in an IT infrastructure system, helping to manage and protect network equipment, servers, and other electronic devices. Rack cabinets protect equipment from dust, impacts, and environmental elements, while also optimizing space and facilitating system management.</p>
+            <p>Rack cabinets come in many different sizes and configurations, from 9U cabinets to large cabinets with multiple compartments. When designing a rack system, factors such as heat dissipation, installation space, and expandability must be carefully considered to ensure long-term stability and efficiency for the network system.</p>
+        </div>
+
+        <div class="article-block">
+            <h2>3. Server Room: A Critical Foundation</h2>
+            <h3>3.1 What is a Server Room?</h3>
+            <p>A server room houses a company's critical servers and network equipment. It serves as the control center for all operations within the company's IT system, from data management to controlling network applications and services. Designing an efficient server room enhances the security, performance, and scalability of the system.</p>
+            
+            <h3>3.2 Requirements When Designing a Server Room</h3>
+            <ul>
+                <li><strong>Space:</strong> The server room needs sufficient space to accommodate servers, network equipment, and other devices. Space is also required for maintenance, replacement, and equipment upgrades.</li>
+                <li><strong>Temperature and humidity:</strong> Servers require a stable operating environment. This necessitates an efficient air conditioning and ventilation system.</li>
+                <li><strong>Security:</strong> Server rooms need to be protected by security systems such as surveillance cameras, access control, and alarm systems.</li>
+                <li><strong>Power supply:</strong> The electrical system must be stable and have backup capabilities, including generators or UPS (Uninterruptible Power Supply) systems to avoid sudden power outages.</li>
+            </ul>
+
+            <h3>3.3 Benefits of a Dedicated Server Room</h3>
+            <p>Having a dedicated server room will help your business ensure the stability and security of your data and IT systems. A server room makes it easy to manage and maintain equipment, thereby optimizing performance and minimizing potential problems.</p>
+        </div>
+
+        <div class="article-block">
+            <h2>4. Why Choose Our Consulting & Design Services?</h2>
+            <h3>4.1 In-depth Consulting</h3>
+            <p>IT infrastructure consulting services will help your business choose the most optimal solutions for your current and future technology needs. Consultants will assess technical requirements and provide appropriate recommendations on the necessary equipment and technologies.</p>
+            
+            <h3>4.2 Professional Design</h3>
+            <p>A professional IT infrastructure design will provide your business with a flexible network system that is easy to upgrade and expand as needed. The design must also ensure security and performance, helping to optimize the work of employees within the organization.</p>
+
+            <h3>4.3 Quality Assurance in Construction</h3>
+            <p>IT infrastructure installation services not only ensure timely deployment but also help the system operate stably and efficiently. The installation company will ensure that all equipment is installed correctly and safely, from cables and racks to the server room.</p>
+        </div>
+
+        <div class="article-block">
+            <h2>5. Benefits of Choosing Us</h2>
+            <ul>
+                <li><strong>Cost savings:</strong> Our consulting services help you choose the most optimal equipment and solutions, minimizing unnecessary investment costs.</li>
+                <li><strong>Enhanced work efficiency:</strong> Professionally designed and implemented infrastructure will help increase work efficiency and minimize downtime due to network issues.</li>
+                <li><strong>Ensuring security and stability:</strong> A well-designed IT infrastructure will help protect a business's critical data and information from external threats.</li>
+            </ul>
+        </div>
+
+        <div class="cta-box">
+            <h3>Ready to optimize your IT infrastructure?</h3>
+            <p>Don't hesitate to contact our consultants to build a solid IT system for your business today.</p>
+            <a href="#contact" class="cta-button">Contact Us Now</a>
+        </div>
+
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="Inecoliv Logo">
+                    <h3>Inecoliv</h3>
+                </div>
+                <p style="margin-top: 15px;"><strong>Inecoliv Technology India Pvt Ltd</strong><br>Global ICT Solution Provider</p>
+            </div>
+            <div class="footer-col">
+                <h4>Core Products</h4>
+                <ul>
+                    <li><a href="products.html">Switching & Routing</a></li>
+                    <li><a href="products.html">Wireless Access Points</a></li>
+                    <li><a href="products.html">Next-Gen Firewalls</a></li>
+                    <li><a href="products.html">Hyperconverged Infra</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Key Services</h4>
+                <ul>
+                    <li><a href="index.html#services">Network Architecture</a></li>
+                    <li><a href="index.html#services">Cybersecurity Audits</a></li>
+                    <li><a href="index.html#services">Infrastructure Management</a></li>
+                    <li><a href="index.html#services">System Integration</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li style="display: flex; gap: 10px;"><span>📍</span> Chennai, India</li>
+                    <li style="display: flex; gap: 10px;"><span>📧</span> info@inecoliv.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Inecoliv Technology India Pvt Ltd. All Rights Reserved.
+        </div>
+    </footer>
 
 </body>
 </html>
