@@ -104,11 +104,28 @@
         .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #374151; font-size: 0.9rem; }
 
         @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .content-section { padding: 50px 5%; }
-            .service-hero h1 { font-size: 2.5rem; }
+            /* Fix Header to stack neatly on mobile */
+            .navbar { flex-direction: column; padding: 15px 5%; }
+            .brand-container { margin-bottom: 12px; }
+            .nav-menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .nav-menu a { font-size: 0.9rem; }
+            
+            /* Fix spacing for the stacked header */
+            .service-hero { margin-top: 110px; height: 40vh; }
+            .service-hero h1 { font-size: 2.2rem; }
+            
+            /* Fix layout spacing */
+            .content-section { padding: 40px 5%; }
+            .intro-text { font-size: 1.05rem; margin-bottom: 40px; }
+            .article-block h2 { font-size: 1.6rem; }
+            
+            /* Ensure grids and footer stack nicely */
+            .highlight-grid { grid-template-columns: 1fr; gap: 20px; }
+            .footer { padding: 50px 5% 30px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-brand { justify-content: center; }
+            .footer-col ul li { justify-content: center; }
         }
-    </style>
 </head>
 <body>
 
