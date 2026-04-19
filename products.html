@@ -155,8 +155,8 @@
     </div>
 
     <div class="section">
-        <div class="product-grid" id="dynamic-product-grid">
-            </div>
+        <div class="product-grid" id="dynamic-product-grid"></div>
+        <div id="pagination-controls" style="display: flex; justify-content: center; gap: 8px; margin-top: 40px; flex-wrap: wrap;"></div>
     </div>
 
     <div id="rfq-section" class="section">
@@ -285,14 +285,12 @@
 
     <div id="detailsModal" class="modal-overlay" style="z-index: 2500;">
         <div class="modal-box" style="max-width: 800px; width: 90%; text-align: left; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            
             <div style="background: #f9fafb; padding: 15px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
                 <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-dark);">Product Details</h3>
                 <button type="button" onclick="closeDetails()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280;">✕</button>
             </div>
 
             <div style="padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
-                
                 <div style="text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
                     <img id="detailImg" src="" alt="" style="max-width: 100%; height: 250px; object-fit: contain;">
                 </div>
@@ -382,8 +380,7 @@
     </script>
 
     <script>
-        // --- DYNAMIC PRODUCT DATABASE ---
-        // Just add your new products to this list!
+        // --- YOUR ORIGINAL 3 PRODUCTS DATABASE ---
         const productDatabase = [
             { 
                 id: 'c9200', 
@@ -414,12 +411,23 @@
             }
         ];
 
-        let cart = [];
+        // --- LOCAL STORAGE CART INIT ---
+        let cart = JSON.parse(localStorage.getItem('inecoliv_cart')) || [];
         let isSubmitting = false; 
 
-        // Initial Load
+        function saveCart() {
+            localStorage.setItem('inecoliv_cart', JSON.stringify(cart));
+        }
+
+        // --- PAGINATION & FILTER VARIABLES ---
+        let currentPage = 1;
+        const itemsPerPage = 12; // Adjust this if you want more or fewer items per page later!
+        let currentFilteredProducts = productDatabase;
+
+        // --- INITIAL LOAD ---
         window.onload = function() { 
-            renderProductGrid(productDatabase); 
+            currentFilteredProducts = productDatabase; 
+            renderProductGrid(); 
             renderCartUI(); 
             handleCountryChange(); 
             handleUrgencyChange(); 
@@ -429,17 +437,23 @@
             if (cart.length > 0 && !isSubmitting) { e.preventDefault(); e.returnValue = ''; }
         });
 
-        // --- CATALOG & MODAL FUNCTIONS ---
-        function renderProductGrid(productsToRender) {
+        // --- CATALOG & PAGINATION FUNCTIONS ---
+        function renderProductGrid() {
             const grid = document.getElementById('dynamic-product-grid');
             grid.innerHTML = ''; 
             
-            if (productsToRender.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #6b7280; padding: 40px;">No products found matching your search.</p>';
+            if (currentFilteredProducts.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #6b7280; padding: 40px; font-size: 1.2rem;">No products found matching your search.</p>';
+                document.getElementById('pagination-controls').innerHTML = ''; // Hide pagination
                 return;
             }
 
-            productsToRender.forEach(p => {
+            // Slice the array for pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const productsToShow = currentFilteredProducts.slice(startIndex, endIndex);
+
+            productsToShow.forEach(p => {
                 grid.innerHTML += `
                     <div class="product-card" onclick="openDetails('${p.id}')" style="cursor: pointer; display: flex; flex-direction: column;">
                         <img src="${p.img}" alt="${p.name}" style="height: 150px; width: 100%; object-fit: contain;">
@@ -452,21 +466,61 @@
                     </div>
                 `;
             });
+
+            renderPaginationControls();
+        }
+
+        function renderPaginationControls() {
+            const totalPages = Math.ceil(currentFilteredProducts.length / itemsPerPage);
+            const paginationDiv = document.getElementById('pagination-controls');
+            paginationDiv.innerHTML = ''; 
+
+            if (totalPages <= 1) return; // Don't show buttons if only 1 page
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                btn.style.padding = "10px 15px";
+                btn.style.border = "1px solid var(--border)";
+                btn.style.borderRadius = "4px";
+                btn.style.cursor = "pointer";
+                btn.style.fontWeight = "bold";
+                btn.style.transition = "all 0.2s";
+
+                if (i === currentPage) {
+                    btn.style.background = "var(--primary)";
+                    btn.style.color = "white";
+                    btn.style.borderColor = "var(--primary)";
+                } else {
+                    btn.style.background = "var(--white)";
+                    btn.style.color = "var(--text-dark)";
+                }
+
+                btn.onclick = function() {
+                    currentPage = i;
+                    renderProductGrid();
+                    document.getElementById('dynamic-product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+
+                paginationDiv.appendChild(btn);
+            }
         }
 
         function filterProducts() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const category = document.getElementById('categoryFilter').value;
             
-            const filtered = productDatabase.filter(p => {
+            currentFilteredProducts = productDatabase.filter(p => {
                 const matchesText = p.name.toLowerCase().includes(searchText) || p.shortDesc.toLowerCase().includes(searchText);
                 const matchesCat = category === 'All' || p.category === category;
                 return matchesText && matchesCat;
             });
             
-            renderProductGrid(filtered);
+            currentPage = 1; // Reset to page 1 on new search
+            renderProductGrid();
         }
 
+        // --- MODAL LOGIC ---
         function openDetails(productId) {
             const product = productDatabase.find(p => p.id === productId);
             
@@ -492,7 +546,6 @@
             document.getElementById('detailsModal').style.display = 'none';
             document.getElementById('detailQty').value = 1;
         }
-
 
         // --- FORM & CART FUNCTIONS ---
         function handleCountryChange() {
@@ -525,9 +578,10 @@
             let existingItem = cart.find(item => item.product === productName);
             if (existingItem) { existingItem.qty += qty; } 
             else { cart.push({ product: productName, qty: qty }); }
+            
+            saveCart(); // Save to localStorage
             renderCartUI();
             
-            // Safe check for button flash (since modal button disappears on close)
             let btn = document.querySelector(`button[onclick="addToCart('${productName}', '${qtyInputId}')"]`);
             if (btn) {
                 let originalText = btn.innerText;
@@ -536,7 +590,11 @@
             }
         }
 
-        function removeCartItem(index) { cart.splice(index, 1); renderCartUI(); }
+        function removeCartItem(index) { 
+            cart.splice(index, 1); 
+            saveCart(); // Save to localStorage
+            renderCartUI(); 
+        }
 
         function renderCartUI() {
             let tbody = document.getElementById('cartBody');
@@ -578,8 +636,12 @@
             document.getElementById('replyToField').value = document.getElementById('userEmail').value;
             
             try {
-                // EmailJS Submission with your exact keys
+                // EmailJS Submission
                 await emailjs.sendForm('service_sh0j9wg', 'template_123o6na', '#rfqForm');
+                
+                // Clear cart from memory upon success!
+                cart = [];
+                saveCart();
                 
                 isSubmitting = true; 
                 document.getElementById('successModal').style.display = 'flex';
