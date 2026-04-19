@@ -190,9 +190,9 @@
             <h2 style="margin-bottom: 5px;">Client Details</h2>
             <p style="margin-bottom: 20px; font-size: 0.9rem;">Please provide your corporate details to receive an official quote.</p>
             
-            <form action="https://api.staticforms.dev/submit" method="post" id="rfqForm" onsubmit="prepareFormSubmission(event)">
+            <form action="https://api.staticforms.dev/submit" method="post" id="rfqForm" onsubmit="return prepareFormSubmission(event)">
                 
-                <input type="hidden" name="apiKey" value="PASTE-YOUR-KEY-HERE"> 
+                <input type="hidden" name="apiKey" value="sf_dde696631f0fbe3f579858fb"> 
                 
                 <input type="hidden" name="subject" value="URGENT: New B2B Quote Request - Inecoliv.com">
                 <input type="hidden" name="redirectTo" value="https://inecoliv.com/index.html">
@@ -382,8 +382,11 @@
 
             otherCountryGrp.style.display = 'none';
             otherCountryInput.required = false;
+            otherCountryInput.value = ''; // Reset
+            
             stateSelect.style.display = 'none';
             stateSelect.required = false;
+            
             locationInput.style.display = 'none';
             locationInput.required = false;
 
@@ -406,13 +409,14 @@
             let urgency = document.getElementById('urgencySelect').value;
             let otherInput = document.getElementById('otherUrgencyInput');
             
-            // This strictly enforces the requirement when "Other" is picked
+            // STRICTLY enforces typing in the box when "Other" is picked
             if (urgency === 'Other') {
                 otherInput.style.display = 'block';
                 otherInput.required = true;
             } else {
                 otherInput.style.display = 'none';
                 otherInput.required = false;
+                otherInput.value = ''; // Resets field if they change their mind
             }
         }
 
