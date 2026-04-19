@@ -233,16 +233,47 @@
                     <div class="form-group">
                         <label>Project Location *</label>
                         <select name="project_state" id="stateSelect" style="display:none;">
-                            <option value="">Select Indian State...</option>
-                            <option value="Andhra Pradesh">Andhra Pradesh</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Kerala">Kerala</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Telangana">Telangana</option>
-                            <option value="West Bengal">West Bengal</option>
+                            <option value="">Select Indian State/UT...</option>
+                            <optgroup label="States">
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <option value="Meghalaya">Meghalaya</option>
+                                <option value="Mizoram">Mizoram</option>
+                                <option value="Nagaland">Nagaland</option>
+                                <option value="Odisha">Odisha</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Sikkim">Sikkim</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Tripura">Tripura</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Uttarakhand">Uttarakhand</option>
+                                <option value="West Bengal">West Bengal</option>
+                            </optgroup>
+                            <optgroup label="Union Territories">
+                                <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Dadra & Nagar Haveli and Daman & Diu">Dadra & Nagar Haveli and Daman & Diu</option>
+                                <option value="Delhi (NCT)">Delhi (NCT)</option>
+                                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Puducherry">Puducherry</option>
+                            </optgroup>
                             <option value="Other/Pan India">Other / Pan India</option>
                         </select>
                         <input type="text" id="locationInput" name="project_location" placeholder="City or Region" style="display:none;">
@@ -255,13 +286,16 @@
 
                     <div class="form-group">
                         <label>Project Urgency *</label>
-                        <select name="urgency" id="urgencySelect" required>
+                        <select name="urgency" id="urgencySelect" required onchange="handleUrgencyChange()">
                             <option value="">Select Timeframe...</option>
                             <option value="Immediate">Immediate Requirement</option>
                             <option value="1-3 Months">1 to 3 Months</option>
                             <option value="Planning Stage">Planning Stage / Future</option>
+                            <option value="Other">Other (Please Specify)</option>
                         </select>
+                        <input type="text" id="otherUrgencyInput" name="custom_urgency" placeholder="Type your timeframe" style="display:none; margin-top: 10px;">
                     </div>
+                    
                     <div class="form-group">
                         <label>GST / Tax Number (Optional)</label>
                         <input type="text" id="gstInput" name="gst_number" placeholder="Enter GSTIN if applicable">
@@ -326,14 +360,15 @@
     <script>
         // Start with empty cart
         let cart = [];
-        let isSubmitting = false; // NEW FIX: Tracks if we are actually submitting
+        let isSubmitting = false; 
 
         window.onload = function() {
             renderCartUI();
-            handleCountryChange(); // Set initial form state
+            handleCountryChange(); 
+            handleUrgencyChange(); 
         };
 
-        // WARNING POPUP: Fixed! Won't trigger if isSubmitting is true
+        // WARNING POPUP
         window.addEventListener('beforeunload', function (e) {
             if (cart.length > 0 && !isSubmitting) {
                 e.preventDefault();
@@ -341,7 +376,7 @@
             }
         });
 
-        // Dynamic Form Logic
+        // Dynamic Form Logic - Country
         function handleCountryChange() {
             let country = document.getElementById('countrySelect').value;
             let otherCountryGrp = document.getElementById('otherCountryGroup');
@@ -349,7 +384,6 @@
             let stateSelect = document.getElementById('stateSelect');
             let locationInput = document.getElementById('locationInput');
 
-            // Reset all to hidden and not required
             otherCountryGrp.style.display = 'none';
             otherCountryInput.required = false;
             stateSelect.style.display = 'none';
@@ -365,9 +399,23 @@
                 otherCountryInput.required = true;
                 locationInput.style.display = 'block';
                 locationInput.required = true;
-            } else if (country !== '') { // China, Vietnam, Taiwan
+            } else if (country !== '') { 
                 locationInput.style.display = 'block';
                 locationInput.required = true;
+            }
+        }
+
+        // Dynamic Form Logic - Urgency
+        function handleUrgencyChange() {
+            let urgency = document.getElementById('urgencySelect').value;
+            let otherInput = document.getElementById('otherUrgencyInput');
+            
+            if (urgency === 'Other') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
             }
         }
 
@@ -430,16 +478,13 @@
                 return false;
             }
 
-            // Tell the browser we are safely submitting, skip the warning popup!
             isSubmitting = true; 
 
-            // Create beautiful email formatting
             let orderDetails = "=== B2B QUOTE REQUEST ===\n\nREQUESTED ITEMS:\n";
             cart.forEach(item => {
                 orderDetails += "► " + item.product + " | Quantity: " + item.qty + "\n";
             });
             
-            // Add custom fields so the email is super clean
             let customDetails = "\n\n=== PROJECT DETAILS ===\n";
             
             let selectedCountry = document.getElementById('countrySelect').value;
@@ -449,14 +494,15 @@
             let finalLocation = selectedCountry === 'India' ? document.getElementById('stateSelect').value : document.getElementById('locationInput').value;
             customDetails += "Project Location: " + finalLocation + "\n";
             
-            customDetails += "Urgency: " + document.getElementById('urgencySelect').value + "\n";
+            let selectedUrgency = document.getElementById('urgencySelect').value;
+            let finalUrgency = selectedUrgency === 'Other' ? document.getElementById('otherUrgencyInput').value : selectedUrgency;
+            customDetails += "Urgency: " + finalUrgency + "\n";
             
             let gst = document.getElementById('gstInput').value;
             if (gst) { customDetails += "GST / Tax Number: " + gst + "\n"; }
             
             customDetails += "=========================";
 
-            // Put everything into the hidden message field for StaticForms
             document.getElementById('cartContentField').value = orderDetails + customDetails;
             document.getElementById('replyToField').value = document.getElementById('userEmail').value;
             
