@@ -196,7 +196,6 @@
             <p style="margin-bottom: 20px; font-size: 0.9rem;">Please provide your corporate details to receive an official quote.</p>
             
             <form id="rfqForm" onsubmit="prepareFormSubmission(event)">
-                <input type="hidden" name="apiKey" value="sf_dde696631f0fbe3f579858fb"> 
                 <input type="hidden" name="subject" value="URGENT: New B2B Quote Request - Inecoliv.com">
                 <input type="hidden" name="replyTo" id="replyToField" value=""> 
                 <input type="hidden" name="message" id="cartContentField">
@@ -359,6 +358,13 @@
         </div>
     </footer>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("ijPin9us_BMCCSqw8");
+        })();
+    </script>
+
     <script>
         let cart = [];
         let isSubmitting = false; 
@@ -448,25 +454,20 @@
             document.getElementById('cartContentField').value = msg;
             document.getElementById('replyToField').value = document.getElementById('userEmail').value;
             
-            let form = document.getElementById('rfqForm');
-            let formData = new FormData(form);
             try {
-                let response = await fetch('https://api.staticforms.dev/submit', { method: 'POST', body: formData });
-                if (response.ok) {
-                    isSubmitting = true; 
-                    document.getElementById('successModal').style.display = 'flex';
-                    let seconds = 5;
-                    let countdownText = document.getElementById('countdownText');
-                    let timer = setInterval(() => {
-                        seconds--; countdownText.innerText = seconds;
-                        if (seconds <= 0) { clearInterval(timer); window.location.href = 'index.html'; }
-                    }, 1000);
-                } else {
-                    alert("Submission failed. Please check your internet and try again.");
-                    submitBtn.innerText = "Submit Request For Quotation"; submitBtn.disabled = false;
-                }
+                // EmailJS Submission with your exact keys
+                await emailjs.sendForm('service_sh0j9wg', 'template_123o6na', '#rfqForm');
+                
+                isSubmitting = true; 
+                document.getElementById('successModal').style.display = 'flex';
+                let seconds = 5;
+                let countdownText = document.getElementById('countdownText');
+                let timer = setInterval(() => {
+                    seconds--; countdownText.innerText = seconds;
+                    if (seconds <= 0) { clearInterval(timer); window.location.href = 'index.html'; }
+                }, 1000);
             } catch (error) {
-                alert("Network error. Please try again.");
+                alert("Submission failed. Please check your internet and try again.");
                 submitBtn.innerText = "Submit Request For Quotation"; submitBtn.disabled = false;
             }
         }
