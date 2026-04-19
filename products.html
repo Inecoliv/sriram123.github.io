@@ -1,24 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Portfolio | Inecoliv Technology India Pvt Ltd</title>
+    <link rel="icon" type="image/jpeg" href="company-logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; background: #f4f7f9; }
-        .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; border: 1px solid #e1e1e1; overflow: hidden; }
-        .header { background: #004a99; color: white; padding: 20px; text-align: center; }
-        .content { padding: 30px; }
-        .section-title { font-weight: bold; color: #004a99; border-bottom: 2px solid #004a99; margin: 20px 0 10px; }
-        .box { background: #f8fbff; border: 1px solid #d0e3ff; padding: 15px; border-radius: 4px; white-space: pre-wrap; }
+        :root { --primary: #c40000; --primary-dark: #8b0000; --text-dark: #1f2937; --text-body: #4b5563; --bg-light: #f9fafb; --white: #ffffff; --border: #e5e7eb; --shadow-sm: 0 1px 3px rgba(0,0,0,0.1); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-body); line-height: 1.7; background-color: var(--bg-light); }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--text-dark); }
+        
+        .navbar { background: var(--white); position: fixed; top: 0; width: 100%; z-index: 1000; padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+        .brand-container { display: flex; align-items: center; text-decoration: none; }
+        .brand-container img { height: 50px; margin-right: 16px; }
+        .nav-menu { display: flex; list-style: none; gap: 35px; }
+        .nav-menu a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.95rem; }
+        
+        .page-header { background: #111827; color: white; padding: 140px 5% 60px; text-align: center; }
+        .section { padding: 60px 8%; max-width: 1400px; margin: 0 auto; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; transition: var(--transition); }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .product-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px; }
+        
+        .controls { display: flex; justify-content: center; gap: 10px; align-items: center; }
+        .qty-input { width: 70px; padding: 8px; border: 1px solid var(--border); border-radius: 4px; text-align: center; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 500; }
+        
+        .rfq-container { background: var(--white); border-radius: 8px; padding: 40px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+        .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .cart-table th, .cart-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group input, .form-group select { padding: 12px; border: 1px solid var(--border); border-radius: 4px; }
+        .full-width { grid-column: 1 / -1; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.8); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .modal-box { background: var(--white); padding: 50px 40px; border-radius: 12px; text-align: center; max-width: 500px; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .footer { background-color: #111827; color: #9ca3af; padding: 60px 8% 30px; margin-top: 60px; }
+        .footer-brand { display: flex; align-items: center; gap: 15px; }
+        .footer-brand img { height: 45px; background: white; padding: 4px; border-radius: 4px; }
+
+        @media (max-width: 768px) { .navbar { flex-direction: column; } .nav-menu { gap: 15px; margin-top: 15px; } .form-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header"><h2>🔔 NEW B2B QUOTE REQUEST</h2></div>
-        <div class="content">
-            <div class="section-title">👤 Contact Details</div>
-            <p><strong>Name:</strong> {name}<br><strong>Company:</strong> {company}<br><strong>Email:</strong> {email}</p>
-            <div class="section-title">📋 Request Details</div>
-            <div class="box">{message}</div>
+
+    <nav class="navbar">
+        <a href="index.html" class="brand-container">
+            <img src="company-logo.jpeg" alt="Inecoliv Logo">
+            <div class="brand-text">
+                <span style="font-weight: 700; color: var(--text-dark);">Inecoliv Technology India Pvt Ltd</span>
+            </div>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>Enterprise Hardware Solutions</h1>
+        <p>Add items to your list and request a professional B2B quote.</p>
+    </div>
+
+    <div class="section">
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="cisco.png" alt="Cisco">
+                <h3>Cisco Catalyst 9200</h3>
+                <div class="controls">
+                    <input type="number" id="qty-cisco" class="qty-input" value="1" min="1">
+                    <button class="btn" onclick="addToCart('Cisco Catalyst 9200', 'qty-cisco')">Add</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="fortinet.png" alt="Fortinet">
+                <h3>FortiGate Firewall</h3>
+                <div class="controls">
+                    <input type="number" id="qty-forti" class="qty-input" value="1" min="1">
+                    <button class="btn" onclick="addToCart('FortiGate Firewall', 'qty-forti')">Add</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="section" id="rfq-section">
+        <div class="rfq-container">
+            <h2 style="margin-bottom: 20px;">Your Quote List</h2>
+            <table class="cart-table">
+                <thead><tr><th>Product</th><th>Qty</th><th>Action</th></tr></thead>
+                <tbody id="cartBody"></tbody>
+            </table>
+            
+            <form id="rfqForm" onsubmit="prepareFormSubmission(event)" style="margin-top: 30px;">
+                <input type="hidden" name="apiKey" value="sf_dde696631f0fbe3f579858fb">
+                <input type="hidden" name="message" id="cartContentField">
+                <div class="form-grid">
+                    <div class="form-group"><label>Full Name</label><input type="text" name="name" required></div>
+                    <div class="form-group"><label>Corporate Email</label><input type="email" id="userEmail" name="email" required></div>
+                    <div class="form-group full-width">
+                        <button type="submit" id="submitBtn" class="btn" style="width: 100%; padding: 15px;">Submit Quotation Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 style="color: #16a34a; margin-bottom: 15px;">✓ Request Received</h2>
+            <p>Our team will contact you shortly. Redirecting in <span id="countdownText">5</span>s...</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src="company-logo.jpeg" alt="Logo">
+            <span style="color: white; font-weight: 700;">Inecoliv Technology</span>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        function addToCart(product, id) {
+            let qty = parseInt(document.getElementById(id).value);
+            let item = cart.find(i => i.product === product);
+            if (item) item.qty += qty; else cart.push({ product, qty });
+            renderCartUI();
+        }
+        function renderCartUI() {
+            let tbody = document.getElementById('cartBody');
+            tbody.innerHTML = cart.length ? "" : "<tr><td colspan='3' style='text-align:center;'>Your list is empty</td></tr>";
+            cart.forEach((item, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${item.product}</td><td style="text-align:center;">${item.qty}</td><td style="text-align:right;"><button style="color:red; background:none; border:none; cursor:pointer;" onclick="cart.splice(${index},1);renderCartUI()">Remove</button></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        async function prepareFormSubmission(e) {
+            e.preventDefault();
+            if (!cart.length) return alert("Add items to your list first!");
+            let btn = document.getElementById('submitBtn');
+            btn.innerText = "Sending..."; btn.disabled = true;
+            
+            let order = "📦 ORDER SUMMARY:\n";
+            cart.forEach(i => order += `• ${i.qty} x ${i.product}\n`);
+            document.getElementById('cartContentField').value = order;
+            
+            try {
+                let res = await fetch('https://api.staticforms.dev/submit', { method: 'POST', body: new FormData(e.target) });
+                if (res.ok) {
+                    document.getElementById('successModal').style.display = 'flex';
+                    let s = 5;
+                    setInterval(() => { s--; document.getElementById('countdownText').innerText = s; if(s<=0) window.location.href='index.html'; }, 1000);
+                }
+            } catch (err) { alert("Error! Please try again."); btn.disabled = false; }
+        }
+    </script>
 </body>
 </html>
