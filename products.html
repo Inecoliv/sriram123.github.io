@@ -80,7 +80,7 @@
         .floating-cart { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; padding: 15px 25px; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 25px rgba(196,0,0,0.4); z-index: 1000; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: transform 0.3s; }
         .floating-cart:hover { transform: scale(1.05); }
 
-        /* --- NEW: Beautiful Success Modal --- */
+        /* --- Beautiful Success Modal --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.8); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .modal-box { background: var(--white); padding: 50px 40px; border-radius: 12px; text-align: center; max-width: 500px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: slideUp 0.4s ease-out; }
         .modal-icon { width: 80px; height: 80px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin: 0 auto 20px; }
@@ -145,7 +145,6 @@
 
     <div class="section">
         <div class="product-grid">
-            
             <div class="product-card">
                 <img src="cisco.png" alt="Cisco Switch">
                 <h3>Cisco Catalyst 9200 Series</h3>
@@ -155,7 +154,6 @@
                     <button class="btn" onclick="addToCart('Cisco Catalyst 9200 Series', 'qty-cisco9200')">Add to List</button>
                 </div>
             </div>
-
             <div class="product-card">
                 <img src="fortinet.png" alt="Fortinet Firewall">
                 <h3>FortiGate Next-Gen Firewall</h3>
@@ -165,7 +163,6 @@
                     <button class="btn" onclick="addToCart('FortiGate Next-Gen Firewall', 'qty-fortigate')">Add to List</button>
                 </div>
             </div>
-
             <div class="product-card">
                 <img src="dell.png" alt="Dell PowerEdge">
                 <h3>Dell PowerEdge Rack Server</h3>
@@ -175,7 +172,6 @@
                     <button class="btn" onclick="addToCart('Dell PowerEdge Rack Server', 'qty-dellserver')">Add to List</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -183,7 +179,6 @@
         <div class="rfq-container">
             <h2 style="margin-bottom: 5px;">Your Requested Items</h2>
             <p style="margin-bottom: 20px; font-size: 0.9rem;">Review your items below. Quantities can be adjusted.</p>
-            
             <div style="overflow-x: auto;">
                 <table class="cart-table" id="cartTable">
                     <thead>
@@ -193,18 +188,14 @@
                             <th style="text-align: right;">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="cartBody">
-                        </tbody>
+                    <tbody id="cartBody"></tbody>
                 </table>
             </div>
-
             <hr style="border: 0; border-top: 1px solid var(--border); margin: 30px 0;">
-
             <h2 style="margin-bottom: 5px;">Client Details</h2>
             <p style="margin-bottom: 20px; font-size: 0.9rem;">Please provide your corporate details to receive an official quote.</p>
             
             <form id="rfqForm" onsubmit="prepareFormSubmission(event)">
-                
                 <input type="hidden" name="apiKey" value="sf_dde696631f0fbe3f579858fb"> 
                 <input type="hidden" name="subject" value="URGENT: New B2B Quote Request - Inecoliv.com">
                 <input type="hidden" name="replyTo" id="replyToField" value=""> 
@@ -227,7 +218,6 @@
                         <label>Mobile Number *</label>
                         <input type="tel" name="phone" required pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" placeholder="10-digit number">
                     </div>
-                    
                     <div class="form-group">
                         <label>Country *</label>
                         <select name="country" id="countrySelect" required onchange="handleCountryChange()">
@@ -239,7 +229,6 @@
                             <option value="Other">Other (Please Specify)</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Project Location *</label>
                         <select name="project_state" id="stateSelect" style="display:none;">
@@ -284,12 +273,10 @@
                         </select>
                         <input type="text" id="locationInput" name="project_location" placeholder="City or Region" style="display:none;">
                     </div>
-
                     <div class="form-group full-width" id="otherCountryGroup" style="display: none;">
                         <label>Specify Your Country *</label>
                         <input type="text" id="otherCountryInput" name="custom_country" placeholder="Enter your country name">
                     </div>
-
                     <div class="form-group">
                         <label>Project Urgency *</label>
                         <select name="urgency" id="urgencySelect" required onchange="handleUrgencyChange()">
@@ -301,12 +288,10 @@
                         </select>
                         <input type="text" id="otherUrgencyInput" name="custom_urgency" placeholder="Type your timeframe" style="display:none; margin-top: 10px;">
                     </div>
-                    
                     <div class="form-group">
                         <label>GST / Tax Number (Optional)</label>
                         <input type="text" id="gstInput" name="gst_number" placeholder="Enter GSTIN if applicable">
                     </div>
-
                     <div class="form-group full-width">
                         <button type="submit" id="submitBtn" class="btn" style="font-size: 1.1rem; padding: 15px; margin-top: 15px;">Submit Request For Quotation</button>
                     </div>
@@ -378,17 +363,10 @@
         let cart = [];
         let isSubmitting = false; 
 
-        window.onload = function() {
-            renderCartUI();
-            handleCountryChange(); 
-            handleUrgencyChange(); 
-        };
+        window.onload = function() { renderCartUI(); handleCountryChange(); handleUrgencyChange(); };
 
         window.addEventListener('beforeunload', function (e) {
-            if (cart.length > 0 && !isSubmitting) {
-                e.preventDefault();
-                e.returnValue = ''; 
-            }
+            if (cart.length > 0 && !isSubmitting) { e.preventDefault(); e.returnValue = ''; }
         });
 
         function handleCountryChange() {
@@ -397,171 +375,99 @@
             let otherCountryInput = document.getElementById('otherCountryInput');
             let stateSelect = document.getElementById('stateSelect');
             let locationInput = document.getElementById('locationInput');
-
             otherCountryGrp.style.display = 'none';
             otherCountryInput.required = false;
-            otherCountryInput.value = ''; 
-            
             stateSelect.style.display = 'none';
             stateSelect.required = false;
-            
             locationInput.style.display = 'none';
             locationInput.required = false;
-
-            if (country === 'India') {
-                stateSelect.style.display = 'block';
-                stateSelect.required = true;
-            } else if (country === 'Other') {
-                otherCountryGrp.style.display = 'flex';
-                otherCountryInput.required = true;
-                locationInput.style.display = 'block';
-                locationInput.required = true;
-            } else if (country !== '') { 
-                locationInput.style.display = 'block';
-                locationInput.required = true;
-            }
+            if (country === 'India') { stateSelect.style.display = 'block'; stateSelect.required = true; } 
+            else if (country === 'Other') { otherCountryGrp.style.display = 'flex'; otherCountryInput.required = true; locationInput.style.display = 'block'; locationInput.required = true; } 
+            else if (country !== '') { locationInput.style.display = 'block'; locationInput.required = true; }
         }
 
         function handleUrgencyChange() {
             let urgency = document.getElementById('urgencySelect').value;
             let otherInput = document.getElementById('otherUrgencyInput');
-            
-            if (urgency === 'Other') {
-                otherInput.style.display = 'block';
-                otherInput.required = true;
-            } else {
-                otherInput.style.display = 'none';
-                otherInput.required = false;
-                otherInput.value = ''; 
-            }
+            if (urgency === 'Other') { otherInput.style.display = 'block'; otherInput.required = true; } 
+            else { otherInput.style.display = 'none'; otherInput.required = false; otherInput.value = ''; }
         }
 
         function addToCart(productName, qtyInputId) {
             let qty = parseInt(document.getElementById(qtyInputId).value);
-            if (qty < 1 || isNaN(qty)) {
-                alert("Please enter a valid quantity.");
-                return;
-            }
-
+            if (qty < 1 || isNaN(qty)) { alert("Please enter a valid quantity."); return; }
             let existingItem = cart.find(item => item.product === productName);
-            if (existingItem) {
-                existingItem.qty += qty;
-            } else {
-                cart.push({ product: productName, qty: qty });
-            }
-
+            if (existingItem) { existingItem.qty += qty; } 
+            else { cart.push({ product: productName, qty: qty }); }
             renderCartUI();
-            
             let btn = document.querySelector(`button[onclick="addToCart('${productName}', '${qtyInputId}')"]`);
             let originalText = btn.innerText;
-            btn.innerText = "✓ Added";
-            btn.style.background = "#059669"; 
+            btn.innerText = "✓ Added"; btn.style.background = "#059669"; 
             setTimeout(() => { btn.innerText = originalText; btn.style.background = ""; }, 2000);
         }
 
-        function removeCartItem(index) {
-            cart.splice(index, 1);
-            renderCartUI();
-        }
+        function removeCartItem(index) { cart.splice(index, 1); renderCartUI(); }
 
         function renderCartUI() {
             let tbody = document.getElementById('cartBody');
             let countBadge = document.getElementById('cartCount');
-            
-            countBadge.innerText = cart.length;
-            tbody.innerHTML = "";
-
-            if (cart.length === 0) {
-                tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:#6b7280;'>Your quote list is empty. Add some products above!</td></tr>";
-                return;
-            }
-
+            countBadge.innerText = cart.length; tbody.innerHTML = "";
+            if (cart.length === 0) { tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:#6b7280;'>Your quote list is empty. Add some products above!</td></tr>"; return; }
             cart.forEach((item, index) => {
                 let tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${item.product}</strong></td>
-                    <td style="text-align: center;">${item.qty}</td>
-                    <td style="text-align: right;"><button class="remove-btn" onclick="removeCartItem(${index})">✕ Remove</button></td>
-                `;
+                tr.innerHTML = `<td><strong>${item.product}</strong></td><td style="text-align: center;">${item.qty}</td><td style="text-align: right;"><button class="remove-btn" onclick="removeCartItem(${index})">✕ Remove</button></td>`;
                 tbody.appendChild(tr);
             });
         }
 
-        // UPGRADED SUBMISSION SCRIPT
         async function prepareFormSubmission(e) {
-            e.preventDefault(); // Stop standard HTML redirect
-            
-            if (cart.length === 0) {
-                alert("Please add at least one product to your list before requesting a quote.");
-                return false;
-            }
-
-            // UI feedback
+            e.preventDefault(); 
+            if (cart.length === 0) { alert("Please add at least one product to your list before requesting a quote."); return false; }
             let submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerText = "Processing Request...";
-            submitBtn.disabled = true;
+            submitBtn.innerText = "Processing Request..."; submitBtn.disabled = true;
 
-            // Build data
-            let orderDetails = "=== B2B QUOTE REQUEST ===\n\nREQUESTED ITEMS:\n";
-            cart.forEach(item => { orderDetails += "► " + item.product + " | Quantity: " + item.qty + "\n"; });
-            
-            let customDetails = "\n\n=== PROJECT DETAILS ===\n";
+            // --- UPDATED PROFESSIONAL EMAIL FORMATTING ---
+            let msg = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            msg += "   🚀 NEW B2B QUOTATION REQUEST\n";
+            msg += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+            msg += "📦 ORDER SUMMARY:\n";
+            cart.forEach(item => { msg += ` • ${item.qty} x ${item.product}\n`; });
+            msg += "\n👤 CLIENT PROFILE:\n";
             let selectedCountry = document.getElementById('countrySelect').value;
             let finalCountry = selectedCountry === 'Other' ? document.getElementById('otherCountryInput').value : selectedCountry;
-            customDetails += "Target Country: " + finalCountry + "\n";
-            
+            msg += ` • Country: ${finalCountry}\n`;
             let finalLocation = selectedCountry === 'India' ? document.getElementById('stateSelect').value : document.getElementById('locationInput').value;
-            customDetails += "Project Location: " + finalLocation + "\n";
-            
+            msg += ` • Project Location: ${finalLocation}\n`;
             let selectedUrgency = document.getElementById('urgencySelect').value;
             let finalUrgency = selectedUrgency === 'Other' ? document.getElementById('otherUrgencyInput').value : selectedUrgency;
-            customDetails += "Urgency: " + finalUrgency + "\n";
-            
+            msg += ` • Urgency: ${finalUrgency}\n`;
             let gst = document.getElementById('gstInput').value;
-            if (gst) { customDetails += "GST / Tax Number: " + gst + "\n"; }
-            customDetails += "=========================";
+            if (gst) { msg += ` • GST/Tax ID: ${gst}\n`; }
+            msg += "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
 
-            document.getElementById('cartContentField').value = orderDetails + customDetails;
+            document.getElementById('cartContentField').value = msg;
             document.getElementById('replyToField').value = document.getElementById('userEmail').value;
             
-            // Send Data in Background
             let form = document.getElementById('rfqForm');
             let formData = new FormData(form);
-
             try {
-                let response = await fetch('https://api.staticforms.dev/submit', {
-                    method: 'POST',
-                    body: formData
-                });
-                
+                let response = await fetch('https://api.staticforms.dev/submit', { method: 'POST', body: formData });
                 if (response.ok) {
-                    isSubmitting = true; // Bypasses the "Are you sure you want to leave" popup
-                    
-                    // Show Beautiful Modal
+                    isSubmitting = true; 
                     document.getElementById('successModal').style.display = 'flex';
-                    
-                    // Run Countdown
                     let seconds = 5;
                     let countdownText = document.getElementById('countdownText');
-                    
                     let timer = setInterval(() => {
-                        seconds--;
-                        countdownText.innerText = seconds;
-                        if (seconds <= 0) {
-                            clearInterval(timer);
-                            window.location.href = 'index.html'; // Redirect!
-                        }
+                        seconds--; countdownText.innerText = seconds;
+                        if (seconds <= 0) { clearInterval(timer); window.location.href = 'index.html'; }
                     }, 1000);
-
                 } else {
-                    alert("There was an error communicating with the server. Please try again.");
-                    submitBtn.innerText = "Submit Request For Quotation";
-                    submitBtn.disabled = false;
+                    alert("Submission failed. Please check your internet and try again.");
+                    submitBtn.innerText = "Submit Request For Quotation"; submitBtn.disabled = false;
                 }
             } catch (error) {
-                alert("Network error. Please check your connection and try again.");
-                submitBtn.innerText = "Submit Request For Quotation";
-                submitBtn.disabled = false;
+                alert("Network error. Please try again.");
+                submitBtn.innerText = "Submit Request For Quotation"; submitBtn.disabled = false;
             }
         }
     </script>
