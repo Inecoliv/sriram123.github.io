@@ -80,7 +80,7 @@
         .floating-cart { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; padding: 15px 25px; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 25px rgba(196,0,0,0.4); z-index: 1000; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: transform 0.3s; }
         .floating-cart:hover { transform: scale(1.05); }
 
-        /* --- Beautiful Success Modal --- */
+        /* --- Beautiful Modals --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.8); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .modal-box { background: var(--white); padding: 50px 40px; border-radius: 12px; text-align: center; max-width: 500px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: slideUp 0.4s ease-out; }
         .modal-icon { width: 80px; height: 80px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; margin: 0 auto 20px; }
@@ -143,36 +143,20 @@
         <p>Select the networking and security hardware you need, and submit for a custom B2B quotation.</p>
     </div>
 
+    <div style="max-width: 1400px; margin: 40px auto 0; padding: 0 8%; display: flex; gap: 15px; flex-wrap: wrap;">
+        <input type="text" id="searchInput" placeholder="🔍 Search products or descriptions..." onkeyup="filterProducts()" style="flex: 1; min-width: 250px; padding: 12px 15px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter'; font-size: 1rem;">
+        <select id="categoryFilter" onchange="filterProducts()" style="padding: 12px 15px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter'; font-size: 1rem; background-color: var(--white); cursor: pointer;">
+            <option value="All">📁 All Categories</option>
+            <option value="Switching">Switching</option>
+            <option value="Security">Security</option>
+            <option value="Servers">Servers</option>
+            <option value="Wireless">Wireless</option>
+        </select>
+    </div>
+
     <div class="section">
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="cisco.png" alt="Cisco Switch">
-                <h3>Cisco Catalyst 9200 Series</h3>
-                <p>Enterprise-class Switching</p>
-                <div class="controls">
-                    <input type="number" id="qty-cisco9200" class="qty-input" value="1" min="1">
-                    <button class="btn" onclick="addToCart('Cisco Catalyst 9200 Series', 'qty-cisco9200')">Add to List</button>
-                </div>
+        <div class="product-grid" id="dynamic-product-grid">
             </div>
-            <div class="product-card">
-                <img src="fortinet.png" alt="Fortinet Firewall">
-                <h3>FortiGate Next-Gen Firewall</h3>
-                <p>Advanced Network Security</p>
-                <div class="controls">
-                    <input type="number" id="qty-fortigate" class="qty-input" value="1" min="1">
-                    <button class="btn" onclick="addToCart('FortiGate Next-Gen Firewall', 'qty-fortigate')">Add to List</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="dell.png" alt="Dell PowerEdge">
-                <h3>Dell PowerEdge Rack Server</h3>
-                <p>High-performance Compute</p>
-                <div class="controls">
-                    <input type="number" id="qty-dellserver" class="qty-input" value="1" min="1">
-                    <button class="btn" onclick="addToCart('Dell PowerEdge Rack Server', 'qty-dellserver')">Add to List</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div id="rfq-section" class="section">
@@ -299,6 +283,38 @@
         </div>
     </div>
 
+    <div id="detailsModal" class="modal-overlay" style="z-index: 2500;">
+        <div class="modal-box" style="max-width: 800px; width: 90%; text-align: left; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+            
+            <div style="background: #f9fafb; padding: 15px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-dark);">Product Details</h3>
+                <button type="button" onclick="closeDetails()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280;">✕</button>
+            </div>
+
+            <div style="padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+                
+                <div style="text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <img id="detailImg" src="" alt="" style="max-width: 100%; height: 250px; object-fit: contain;">
+                </div>
+
+                <div>
+                    <span id="detailCategory" style="background: #e5f0ff; color: #004a99; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; display: inline-block;">Category</span>
+                    <h2 id="detailTitle" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--text-dark);">Product Name</h2>
+                    <p id="detailDesc" style="color: var(--text-body); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">Full detailed description goes here.</p>
+                    
+                    <h4 style="font-size: 1rem; margin-bottom: 10px; color: var(--text-dark);">Key Specifications:</h4>
+                    <ul id="detailSpecs" style="margin-left: 20px; color: var(--text-body); font-size: 0.9rem; margin-bottom: 30px; line-height: 1.8;">
+                        </ul>
+
+                    <div style="display: flex; gap: 15px; align-items: center; background: #f9fafb; padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                        <input type="number" id="detailQty" value="1" min="1" style="width: 80px; padding: 10px; border: 1px solid var(--border); border-radius: 4px; text-align: center; font-weight: bold; font-size: 1rem;">
+                        <button type="button" id="detailAddBtn" class="btn" style="flex: 1; padding: 12px; font-size: 1rem;">Add to Quote List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="successModal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-icon">✓</div>
@@ -366,15 +382,119 @@
     </script>
 
     <script>
+        // --- DYNAMIC PRODUCT DATABASE ---
+        // Just add your new products to this list!
+        const productDatabase = [
+            { 
+                id: 'c9200', 
+                name: 'Cisco Catalyst 9200 Series', 
+                category: 'Switching', 
+                img: 'cisco.png', 
+                shortDesc: 'Enterprise-class Layer 3 Switching.',
+                longDesc: 'The Cisco Catalyst 9200 Series switches extend the power of intent-based networking and Catalyst 9000 hardware and software innovation to a broader set of deployments. It offers uncompromised simplicity and security.',
+                specs: ['Up to 48 ports of full Power over Ethernet Plus (PoE+)', 'Resiliency with field-replaceable units (FRU)', 'Operational efficiency with optional backplane stacking']
+            },
+            { 
+                id: 'fg100f', 
+                name: 'FortiGate 100F Firewall', 
+                category: 'Security', 
+                img: 'fortinet.png', 
+                shortDesc: 'Next-Gen Firewall with built-in SD-WAN.',
+                longDesc: 'The FortiGate 100F series delivers next generation firewall capabilities for mid-sized to large enterprises, with the flexibility to be deployed at the campus or enterprise branch.',
+                specs: ['AI/ML powered FortiGuard Services', 'Built-in SD-WAN capabilities', 'Dedicated Security Compute Rating hardware']
+            },
+            { 
+                id: 'dell750', 
+                name: 'Dell PowerEdge R750', 
+                category: 'Servers', 
+                img: 'dell.png', 
+                shortDesc: 'High-performance 2U Compute Rack Server.',
+                longDesc: 'The Dell EMC PowerEdge R750 is a full-featured enterprise server, delivering outstanding performance for the most demanding workloads like AI, database, and high-performance computing.',
+                specs: ['Supports up to two 3rd Gen Intel Xeon Scalable processors', 'Up to 32 DDR4 DIMMs at 3200 MT/s', 'PCIe Gen 4 support for advanced throughput']
+            }
+        ];
+
         let cart = [];
         let isSubmitting = false; 
 
-        window.onload = function() { renderCartUI(); handleCountryChange(); handleUrgencyChange(); };
+        // Initial Load
+        window.onload = function() { 
+            renderProductGrid(productDatabase); 
+            renderCartUI(); 
+            handleCountryChange(); 
+            handleUrgencyChange(); 
+        };
 
         window.addEventListener('beforeunload', function (e) {
             if (cart.length > 0 && !isSubmitting) { e.preventDefault(); e.returnValue = ''; }
         });
 
+        // --- CATALOG & MODAL FUNCTIONS ---
+        function renderProductGrid(productsToRender) {
+            const grid = document.getElementById('dynamic-product-grid');
+            grid.innerHTML = ''; 
+            
+            if (productsToRender.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #6b7280; padding: 40px;">No products found matching your search.</p>';
+                return;
+            }
+
+            productsToRender.forEach(p => {
+                grid.innerHTML += `
+                    <div class="product-card" onclick="openDetails('${p.id}')" style="cursor: pointer; display: flex; flex-direction: column;">
+                        <img src="${p.img}" alt="${p.name}" style="height: 150px; width: 100%; object-fit: contain;">
+                        <div>
+                            <span style="background: #e5f0ff; color: #004a99; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; display: inline-block;">${p.category}</span>
+                        </div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">${p.name}</h3>
+                        <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 15px; flex-grow: 1;">${p.shortDesc}</p>
+                        <button type="button" class="btn" style="width: 100%; background: #1f2937;">View Details</button>
+                    </div>
+                `;
+            });
+        }
+
+        function filterProducts() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            
+            const filtered = productDatabase.filter(p => {
+                const matchesText = p.name.toLowerCase().includes(searchText) || p.shortDesc.toLowerCase().includes(searchText);
+                const matchesCat = category === 'All' || p.category === category;
+                return matchesText && matchesCat;
+            });
+            
+            renderProductGrid(filtered);
+        }
+
+        function openDetails(productId) {
+            const product = productDatabase.find(p => p.id === productId);
+            
+            document.getElementById('detailImg').src = product.img;
+            document.getElementById('detailCategory').innerText = product.category;
+            document.getElementById('detailTitle').innerText = product.name;
+            document.getElementById('detailDesc').innerText = product.longDesc;
+            
+            const specsList = document.getElementById('detailSpecs');
+            specsList.innerHTML = '';
+            product.specs.forEach(spec => { specsList.innerHTML += `<li>${spec}</li>`; });
+
+            const addBtn = document.getElementById('detailAddBtn');
+            addBtn.onclick = function() {
+                addToCart(product.name, 'detailQty');
+                closeDetails();
+            };
+
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+
+        function closeDetails() {
+            document.getElementById('detailsModal').style.display = 'none';
+            document.getElementById('detailQty').value = 1;
+        }
+
+
+        // --- FORM & CART FUNCTIONS ---
         function handleCountryChange() {
             let country = document.getElementById('countrySelect').value;
             let otherCountryGrp = document.getElementById('otherCountryGroup');
@@ -406,10 +526,14 @@
             if (existingItem) { existingItem.qty += qty; } 
             else { cart.push({ product: productName, qty: qty }); }
             renderCartUI();
+            
+            // Safe check for button flash (since modal button disappears on close)
             let btn = document.querySelector(`button[onclick="addToCart('${productName}', '${qtyInputId}')"]`);
-            let originalText = btn.innerText;
-            btn.innerText = "✓ Added"; btn.style.background = "#059669"; 
-            setTimeout(() => { btn.innerText = originalText; btn.style.background = ""; }, 2000);
+            if (btn) {
+                let originalText = btn.innerText;
+                btn.innerText = "✓ Added"; btn.style.background = "#059669"; 
+                setTimeout(() => { btn.innerText = originalText; btn.style.background = ""; }, 2000);
+            }
         }
 
         function removeCartItem(index) { cart.splice(index, 1); renderCartUI(); }
@@ -421,7 +545,7 @@
             if (cart.length === 0) { tbody.innerHTML = "<tr><td colspan='3' style='text-align:center; color:#6b7280;'>Your quote list is empty. Add some products above!</td></tr>"; return; }
             cart.forEach((item, index) => {
                 let tr = document.createElement('tr');
-                tr.innerHTML = `<td><strong>${item.product}</strong></td><td style="text-align: center;">${item.qty}</td><td style="text-align: right;"><button class="remove-btn" onclick="removeCartItem(${index})">✕ Remove</button></td>`;
+                tr.innerHTML = `<td><strong>${item.product}</strong></td><td style="text-align: center;">${item.qty}</td><td style="text-align: right;"><button type="button" class="remove-btn" onclick="removeCartItem(${index})">✕ Remove</button></td>`;
                 tbody.appendChild(tr);
             });
         }
@@ -432,7 +556,6 @@
             let submitBtn = document.getElementById('submitBtn');
             submitBtn.innerText = "Processing Request..."; submitBtn.disabled = true;
 
-            // --- UPDATED PROFESSIONAL EMAIL FORMATTING ---
             let msg = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
             msg += "   🚀 NEW B2B QUOTATION REQUEST\n";
             msg += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
