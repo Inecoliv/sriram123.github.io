@@ -301,13 +301,13 @@
     </div>
 
     <div id="detailsModal" class="modal-overlay" style="z-index: 2500;">
-        <div class="modal-box" style="max-width: 800px; width: 90%; text-align: left; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-            <div style="background: #f9fafb; padding: 15px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <div class="modal-box" style="max-width: 800px; width: 90%; max-height: 90vh; text-align: left; padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+            <div style="background: #f9fafb; padding: 15px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
                 <h3 style="margin: 0; font-size: 1.2rem; color: var(--text-dark);">Product Details</h3>
                 <button type="button" onclick="closeDetails()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280;">✕</button>
             </div>
 
-            <div style="padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+            <div style="padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: start; overflow-y: auto; flex-grow: 1;">
                 
                 <div style="text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
                     <img id="detailImg" src="" alt="" loading="lazy" style="max-width: 100%; height: 250px; object-fit: contain; transition: opacity 0.3s;">
@@ -638,7 +638,7 @@
             
             const descEl = document.getElementById('detailDesc');
             if (product.longDesc) {
-                descEl.innerText = product.longDesc;
+                descEl.innerHTML = product.longDesc; 
                 descEl.style.display = 'block';
             } else {
                 descEl.style.display = 'none';
