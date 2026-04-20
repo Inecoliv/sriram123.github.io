@@ -147,10 +147,14 @@
         <input type="text" id="searchInput" placeholder="🔍 Search products or descriptions..." onkeyup="filterProducts()" style="flex: 1; min-width: 250px; padding: 12px 15px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter'; font-size: 1rem;">
         <select id="categoryFilter" onchange="filterProducts()" style="padding: 12px 15px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter'; font-size: 1rem; background-color: var(--white); cursor: pointer;">
             <option value="All">📁 All Categories</option>
-            <option value="Switching">Switching</option>
+            <option value="Networking">Networking</option>
             <option value="Security">Security</option>
-            <option value="Servers">Servers</option>
-            <option value="Wireless">Wireless</option>
+            <option value="Server">Server</option>
+            <option value="Storage">Storage</option>
+            <option value="Wifi System">Wifi System</option>
+            <option value="Surveillance">Surveillance</option>
+            <option value="PBX System">PBX System</option>
+            <option value="Software License">Software License</option>
         </select>
     </div>
 
@@ -291,8 +295,11 @@
             </div>
 
             <div style="padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
-                <div style="text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                    <img id="detailImg" src="" alt="" loading="lazy" style="max-width: 100%; height: 250px; object-fit: contain;">
+                
+                <div style="text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                    <img id="detailImg" src="" alt="" loading="lazy" style="max-width: 100%; height: 250px; object-fit: contain; transition: opacity 0.3s;">
+                    <div id="detailThumbnails" style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; max-width: 100%; justify-content: center;">
+                    </div>
                 </div>
 
                 <div>
@@ -385,45 +392,19 @@
     </script>
 
     <script>
-        const productDatabase = [
-            { 
-                id: 'c9200', 
-                name: 'Cisco Catalyst 9200 Series', 
-                category: 'Switching', 
-                img: 'cisco.png', 
-                shortDesc: 'Enterprise-class Layer 3 Switching.',
-                longDesc: 'The Cisco Catalyst 9200 Series switches extend the power of intent-based networking and Catalyst 9000 hardware and software innovation to a broader set of deployments. It offers uncompromised simplicity and security.',
-                specs: ['Up to 48 ports of full Power over Ethernet Plus (PoE+)', 'Resiliency with field-replaceable units (FRU)', 'Operational efficiency with optional backplane stacking']
-            },
-            { 
-                id: 'fg100f', 
-                name: 'FortiGate 100F Firewall', 
-                category: 'Security', 
-                img: 'fortinet.png', 
-                shortDesc: 'Next-Gen Firewall with built-in SD-WAN.',
-                longDesc: 'The FortiGate 100F series delivers next generation firewall capabilities for mid-sized to large enterprises, with the flexibility to be deployed at the campus or enterprise branch.',
-                specs: ['AI/ML powered FortiGuard Services', 'Built-in SD-WAN capabilities', 'Dedicated Security Compute Rating hardware']
-            },
-            { 
-                id: 'dell750', 
-                name: 'Dell PowerEdge R750', 
-                category: 'Servers', 
-                img: 'dell.png', 
-                shortDesc: 'High-performance 2U Compute Rack Server.',
-                longDesc: 'The Dell EMC PowerEdge R750 is a full-featured enterprise server, delivering outstanding performance for the most demanding workloads like AI, database, and high-performance computing.',
-                specs: ['Supports up to two 3rd Gen Intel Xeon Scalable processors', 'Up to 32 DDR4 DIMMs at 3200 MT/s', 'PCIe Gen 4 support for advanced throughput']
-            }
-        ];
-
+        // --- LIVE DATABASE VARIABLES ---
+        let productDatabase = []; // Starts empty, filled by Google Sheets!
         let cart = JSON.parse(localStorage.getItem('inecoliv_cart')) || [];
         let isSubmitting = false; 
+        
+        let currentPage = 1;
+        const itemsPerPage = 12; 
+        let currentFilteredProducts = [];
 
         function saveCart() {
             localStorage.setItem('inecoliv_cart', JSON.stringify(cart));
         }
 
-        // --- UPGRADED TOAST NOTIFICATION ---
-        // It can now show Red Errors or Blue Info messages!
         function showToast(message, type = 'error') {
             const toast = document.getElementById('toastNotification');
             const toastMsg = document.getElementById('toastMessage');
@@ -446,27 +427,78 @@
             }, 3500);
         }
 
-        let currentPage = 1;
-        const itemsPerPage = 12; 
-        let currentFilteredProducts = productDatabase;
+        // --- CSV PARSER ENGINE (The Magic Reader) ---
+        function csvToArray(text) {
+            let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
+            for (let l of text) {
+                if ('"' === l) {
+                    if (s && l === p) row[i] += l;
+                    s = !s;
+                } else if (',' === l && s) l = row[++i] = '';
+                else if ('\n' === l && s) {
+                    if ('\r' === p) row[i] = row[i].slice(0, -1);
+                    row = ret[++r] = [l = '']; i = 0;
+                } else row[i] += l;
+                p = l;
+            }
+            return ret;
+        }
 
-        // --- INITIAL LOAD ---
-        window.onload = function() { 
-            currentFilteredProducts = productDatabase; 
+        function parseCSVToProducts(csv) {
+            const rows = csvToArray(csv);
+            const products = [];
+            // Skip row 0 (the headers)
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i];
+                if (cols.length < 7 || !cols[0]) continue; // Skip empty rows
+                
+                products.push({
+                    id: cols[0].trim(),
+                    name: cols[1].trim(),
+                    category: cols[2].trim(),
+                    // Splits the images by | and puts them in an array!
+                    img: cols[3] ? cols[3].split('|').map(s => s.trim()).filter(s => s.length > 0) : ['logo.png'],
+                    shortDesc: cols[4].trim(),
+                    longDesc: cols[5].trim(),
+                    specs: cols[6] ? cols[6].split('|').map(s => s.trim()).filter(s => s.length > 0) : []
+                });
+            }
+            return products;
+        }
+
+        // --- INITIAL LOAD WITH GOOGLE SHEETS SYNC ---
+        window.onload = async function() { 
+            const grid = document.getElementById('dynamic-product-grid');
+            // Show Loading Screen
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--primary); font-weight: bold; font-size: 1.2rem; padding: 40px;">🔄 Syncing Live Database...</p>';
+
+            try {
+                // Modified link to force CSV output from Google Sheets
+                const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQtuT2IiIE0VURbxikolc1SPzUJMf_yRt0Jm9dumOPKOgpaCBCq3B4yIEVthapCINBnDRnp79dXkuZl/pub?output=csv";
+                const response = await fetch(sheetUrl);
+                const csvText = await response.text();
+                
+                productDatabase = parseCSVToProducts(csvText);
+                currentFilteredProducts = productDatabase;
+                
+            } catch (error) {
+                console.error("Database Error:", error);
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red; font-size: 1.1rem; padding: 40px;">⚠️ Failed to load products. Please check your internet connection.</p>';
+                return;
+            }
+
             renderProductGrid(); 
             renderCartUI(); 
             handleCountryChange(); 
             handleUrgencyChange(); 
 
-            // SHOW BLUE WELCOME BACK TOAST IF CART HAS ITEMS
             if (cart.length > 0) {
                 setTimeout(() => {
                     showToast(`Welcome back! You have ${cart.length} item(s) waiting in your quote list.`, 'info');
-                }, 500); // 0.5 second delay so it slides down smoothly after page loads
+                }, 500); 
             }
         };
 
-        // Keeps the browser's native grey warning as a final safety net
         window.addEventListener('beforeunload', function (e) {
             if (cart.length > 0 && !isSubmitting) { e.preventDefault(); e.returnValue = ''; }
         });
@@ -486,9 +518,10 @@
             const productsToShow = currentFilteredProducts.slice(startIndex, endIndex);
 
             productsToShow.forEach(p => {
+                // Note: We use p.img[0] here to only show the FIRST image on the grid
                 grid.innerHTML += `
                     <div class="product-card" onclick="openDetails('${p.id}')" style="cursor: pointer; display: flex; flex-direction: column;">
-                        <img src="${p.img}" alt="${p.name}" loading="lazy" style="height: 150px; width: 100%; object-fit: contain;">
+                        <img src="${p.img[0]}" alt="${p.name}" loading="lazy" style="height: 150px; width: 100%; object-fit: contain;">
                         <div>
                             <span style="background: #e5f0ff; color: #004a99; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; display: inline-block;">${p.category}</span>
                         </div>
@@ -555,10 +588,49 @@
         function openDetails(productId) {
             const product = productDatabase.find(p => p.id === productId);
             
-            document.getElementById('detailImg').src = product.img;
+            // Set initial main image
+            const mainImg = document.getElementById('detailImg');
+            mainImg.src = product.img[0];
+            
+            // Build the Amazon-Style Thumbnails!
+            const thumbContainer = document.getElementById('detailThumbnails');
+            thumbContainer.innerHTML = '';
+            
+            if (product.img.length > 1) {
+                product.img.forEach(imgSrc => {
+                    const thumb = document.createElement('img');
+                    thumb.src = imgSrc;
+                    thumb.style.height = '60px';
+                    thumb.style.width = '60px';
+                    thumb.style.objectFit = 'contain';
+                    thumb.style.border = '1px solid var(--border)';
+                    thumb.style.borderRadius = '4px';
+                    thumb.style.cursor = 'pointer';
+                    thumb.style.padding = '2px';
+                    
+                    // Click to swap image with a cool fade effect
+                    thumb.onclick = function() {
+                        mainImg.style.opacity = 0.5;
+                        setTimeout(() => {
+                            mainImg.src = imgSrc;
+                            mainImg.style.opacity = 1;
+                        }, 150);
+                    };
+                    thumbContainer.appendChild(thumb);
+                });
+            }
+
             document.getElementById('detailCategory').innerText = product.category;
             document.getElementById('detailTitle').innerText = product.name;
-            document.getElementById('detailDesc').innerText = product.longDesc;
+            
+            // Hide description completely if blank
+            const descEl = document.getElementById('detailDesc');
+            if (product.longDesc) {
+                descEl.innerText = product.longDesc;
+                descEl.style.display = 'block';
+            } else {
+                descEl.style.display = 'none';
+            }
             
             const specsList = document.getElementById('detailSpecs');
             specsList.innerHTML = '';
