@@ -45,11 +45,52 @@
         .page-header { background: #111827; color: white; padding: 140px 5% 60px; text-align: center; }
         .page-header h1 { color: white; font-size: 2.5rem; margin-bottom: 10px; }
 
-        /* --- BULLETPROOF PREMIUM GLOW EFFECTS --- */
-        .premium-input:focus {
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 0 4px rgba(196, 0, 0, 0.1) !important;
+        /* --- Clean Modern Search & Filter Bar (Matched to your screenshot) --- */
+        .filter-container {
+            max-width: 1400px; margin: 40px auto 0; padding: 0 8%;
+            display: flex; gap: 15px; flex-wrap: wrap; align-items: center;
         }
+        .search-wrapper {
+            flex: 1; min-width: 250px; position: relative;
+            display: flex; align-items: center;
+        }
+        .search-icon {
+            position: absolute; left: 15px; color: #6b7280; font-size: 1.1rem; pointer-events: none;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--white);
+            transition: var(--transition);
+            outline: none;
+        }
+        .search-input:focus { border-color: var(--primary); }
+        
+        .category-select {
+            padding: 12px 40px 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            /* Standard Sharp Chevron Down SVG */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 18px;
+        }
+        .category-select:focus { border-color: var(--primary); }
 
         /* --- Product Grid --- */
         .section { padding: 60px 8%; max-width: 1400px; margin: 0 auto; }
@@ -149,16 +190,12 @@
         <p>Select the networking and security hardware you need, and submit for a custom B2B quotation.</p>
     </div>
 
-    <div style="max-width: 1400px; margin: 40px auto 0; padding: 0 8%; display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
-        
-        <div style="flex: 1; min-width: 250px; position: relative; display: flex; align-items: center;">
-            <span style="position: absolute; left: 20px; color: #6b7280; font-size: 1.1rem; pointer-events: none; z-index: 10;">🔍</span>
-            <input type="text" id="searchInput" class="premium-input" placeholder="Search enterprise models, products..." onkeyup="filterProducts()" 
-                style="width: 100%; padding: 16px 20px 16px 50px; border: 2px solid #e5e7eb; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #1f2937; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); outline: none; transition: all 0.3s;">
+    <div class="filter-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search products or descriptions..." onkeyup="filterProducts()">
         </div>
-
-        <select id="categoryFilter" class="premium-input" onchange="filterProducts()" 
-            style="padding: 16px 50px 16px 25px; border: 2px solid #e5e7eb; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 1rem; color: #1f2937; background-color: #ffffff; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); outline: none; transition: all 0.3s; appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill=%22%234b5563%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 18px center;">
+        <select id="categoryFilter" class="category-select" onchange="filterProducts()">
             <option value="All">📁 All Categories</option>
             <option value="Networking">Networking</option>
             <option value="Security">Security</option>
@@ -169,7 +206,6 @@
             <option value="PBX System">PBX System</option>
             <option value="Software License">Software License</option>
         </select>
-
     </div>
 
     <div class="section">
