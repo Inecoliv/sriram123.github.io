@@ -292,7 +292,7 @@
 
             <div style="padding: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
                 <div style="text-align: center; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                    <img id="detailImg" src="" alt="" style="max-width: 100%; height: 250px; object-fit: contain;">
+                    <img id="detailImg" src="" alt="" loading="lazy" style="max-width: 100%; height: 250px; object-fit: contain;">
                 </div>
 
                 <div>
@@ -311,6 +311,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="toastNotification" style="position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; font-weight: 600; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4); z-index: 3000; transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.2rem;">⚠️</span>
+        <span id="toastMessage">Message here</span>
     </div>
 
     <div id="successModal" class="modal-overlay">
@@ -419,6 +424,17 @@
             localStorage.setItem('inecoliv_cart', JSON.stringify(cart));
         }
 
+        // --- TOAST NOTIFICATION FUNCTION ---
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.innerText = message;
+            toast.style.top = '20px'; // Slide down
+            setTimeout(() => {
+                toast.style.top = '-100px'; // Slide back up after 3.5s
+            }, 3500);
+        }
+
         // --- PAGINATION & FILTER VARIABLES ---
         let currentPage = 1;
         const itemsPerPage = 12; // Adjust this if you want more or fewer items per page later!
@@ -456,7 +472,7 @@
             productsToShow.forEach(p => {
                 grid.innerHTML += `
                     <div class="product-card" onclick="openDetails('${p.id}')" style="cursor: pointer; display: flex; flex-direction: column;">
-                        <img src="${p.img}" alt="${p.name}" style="height: 150px; width: 100%; object-fit: contain;">
+                        <img src="${p.img}" alt="${p.name}" loading="lazy" style="height: 150px; width: 100%; object-fit: contain;">
                         <div>
                             <span style="background: #e5f0ff; color: #004a99; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; display: inline-block;">${p.category}</span>
                         </div>
@@ -574,7 +590,10 @@
 
         function addToCart(productName, qtyInputId) {
             let qty = parseInt(document.getElementById(qtyInputId).value);
-            if (qty < 1 || isNaN(qty)) { alert("Please enter a valid quantity."); return; }
+            
+            // USING THE NEW TOAST INSTEAD OF ALERT
+            if (qty < 1 || isNaN(qty)) { showToast("Please enter a valid quantity."); return; }
+            
             let existingItem = cart.find(item => item.product === productName);
             if (existingItem) { existingItem.qty += qty; } 
             else { cart.push({ product: productName, qty: qty }); }
@@ -610,7 +629,10 @@
 
         async function prepareFormSubmission(e) {
             e.preventDefault(); 
-            if (cart.length === 0) { alert("Please add at least one product to your list before requesting a quote."); return false; }
+            
+            // USING THE NEW TOAST INSTEAD OF ALERT
+            if (cart.length === 0) { showToast("Please add at least one product to your list before requesting a quote."); return false; }
+            
             let submitBtn = document.getElementById('submitBtn');
             submitBtn.innerText = "Processing Request..."; submitBtn.disabled = true;
 
@@ -652,7 +674,8 @@
                     if (seconds <= 0) { clearInterval(timer); window.location.href = 'index.html'; }
                 }, 1000);
             } catch (error) {
-                alert("Submission failed. Please check your internet and try again.");
+                // USING THE NEW TOAST INSTEAD OF ALERT
+                showToast("Submission failed. Please check your internet and try again.");
                 submitBtn.innerText = "Submit Request For Quotation"; submitBtn.disabled = false;
             }
         }
