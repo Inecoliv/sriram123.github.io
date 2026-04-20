@@ -405,12 +405,13 @@
     </script>
 
     <script>
-        // --- LIVE DATABASE VARIABLES ---
+        // --- LIVE DATABASE VARIABLES WITH MEMORY ---
         let productDatabase = []; 
         let cart = JSON.parse(localStorage.getItem('inecoliv_cart')) || [];
         let isSubmitting = false; 
         
-        let currentPage = 1;
+        // Remembers page on refresh
+        let currentPage = parseInt(sessionStorage.getItem('inecoliv_current_page')) || 1;
         const itemsPerPage = 12; 
         let currentFilteredProducts = [];
 
@@ -496,8 +497,25 @@
                 const csvText = await response.text();
                 
                 productDatabase = parseCSVToProducts(csvText);
-                currentFilteredProducts = productDatabase;
                 
+                // RESTORE FILTERS ON REFRESH
+                let savedSearch = sessionStorage.getItem('inecoliv_search') || '';
+                let savedCat = sessionStorage.getItem('inecoliv_category') || 'All';
+                document.getElementById('searchInput').value = savedSearch;
+                document.getElementById('categoryFilter').value = savedCat;
+                
+                currentFilteredProducts = productDatabase.filter(p => {
+                    const matchesText = p.name.toLowerCase().includes(savedSearch.toLowerCase()) || p.shortDesc.toLowerCase().includes(savedSearch.toLowerCase());
+                    const matchesCat = savedCat === 'All' || p.category === savedCat;
+                    return matchesText && matchesCat;
+                });
+
+                // Failsafe: if items were deleted and page 5 no longer exists, go to last possible page
+                let maxPage = Math.ceil(currentFilteredProducts.length / itemsPerPage);
+                if (currentPage > maxPage && maxPage > 0) {
+                    currentPage = maxPage;
+                }
+
             } catch (error) {
                 console.error("Database Error:", error);
                 grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: red; font-size: 1.1rem; padding: 40px;">⚠️ Failed to load products. Please check your internet connection.</p>';
@@ -577,8 +595,10 @@
                     btn.style.color = "var(--text-dark)";
                 }
 
+                // REMEMBER PAGE ON CLICK
                 btn.onclick = function() {
                     currentPage = i;
+                    sessionStorage.setItem('inecoliv_current_page', currentPage);
                     renderProductGrid();
                     document.getElementById('dynamic-product-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 };
@@ -591,13 +611,19 @@
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const category = document.getElementById('categoryFilter').value;
             
+            // REMEMBER SEARCH/FILTER ON CHANGE
+            sessionStorage.setItem('inecoliv_search', searchText);
+            sessionStorage.setItem('inecoliv_category', category);
+            
             currentFilteredProducts = productDatabase.filter(p => {
                 const matchesText = p.name.toLowerCase().includes(searchText) || p.shortDesc.toLowerCase().includes(searchText);
                 const matchesCat = category === 'All' || p.category === category;
                 return matchesText && matchesCat;
             });
             
+            // If they search, it goes back to page 1 of the new results
             currentPage = 1; 
+            sessionStorage.setItem('inecoliv_current_page', currentPage);
             renderProductGrid();
         }
 
