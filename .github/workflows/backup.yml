@@ -1,0 +1,29 @@
+name: Monthly Website Backup to Google Drive
+
+on:
+  schedule:
+    # This runs automatically at Midnight on the 1st of every month
+    - cron: '0 0 1 * *'
+  workflow_dispatch: # This gives you a button to run it manually right now!
+
+jobs:
+  run-backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Create Zip Archive
+        run: |
+          # Creates a zip file named with the current month and year
+          ZIP_NAME="Inecoliv_Backup_$(date +'%B_%Y').zip"
+          zip -r "$ZIP_NAME" . -x "*.git*"
+          echo "FILE_TO_UPLOAD=$ZIP_NAME" >> $GITHUB_ENV
+
+      - name: Upload to Google Drive
+        uses: adityak74/google-drive-upload-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
+          filename: ${{ env.FILE_TO_UPLOAD }}
+          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
+          overwrite: "false"
