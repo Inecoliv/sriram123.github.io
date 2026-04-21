@@ -6,6 +6,12 @@
     <link rel="icon" type="image/png" href="logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">   
     <style>
+        /* --- MAGIC FIX FOR HEADER OVERLAP --- */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 150px; /* Prevents the mobile menu from covering the section titles */
+        }
+
         /* --- Core Variables & Reset --- */
         :root {
             --primary: #c40000;
@@ -157,7 +163,7 @@
             .about-grid, .staff-container { flex-direction: column; }
             .hero h1 { font-size: 3rem; }
         }
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
             /* Fix Header and Menu */
             .navbar { flex-direction: column; padding: 15px 5%; }
             .brand-container { margin-bottom: 12px; justify-content: center; text-align: center; }
@@ -269,7 +275,7 @@
                     <div class="service-img-wrapper"><img src="wifi.jpg" alt="Enterprise Wi-Fi System"></div>
                     <h4>Enterprise Wi-Fi System</h4>
                 </div>
-            </a>           
+            </a>            
             <a href="server-storage.html" style="text-decoration: none; color: inherit;">
                 <div class="service-card">
                     <div class="service-img-wrapper"><img src="server-storage.jpg" alt="Server and Storage Systems"></div>
@@ -337,7 +343,7 @@
         </div>
     </section>
 
-    <footer id="contact" class="footer">
+    <footer class="footer">
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="footer-brand">
@@ -364,7 +370,8 @@
                     <li><a href="#services">System Integration</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
+            
+            <div id="contact" class="footer-col">
                 <h4>Contact Us</h4>
                 <ul>
                     <li style="display: flex; gap: 10px; align-items: flex-start;">
