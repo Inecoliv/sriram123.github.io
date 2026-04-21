@@ -1,1 +1,36 @@
+name: 15-Day Website Backup to Google Drive
 
+on:
+  schedule:
+    # Runs on the 1st and 16th of every month
+    - cron: '0 0 1,16 * *'
+  workflow_dispatch:
+
+jobs:
+  run-backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Create Zip Archive
+        run: |
+          ZIP_NAME="Inecoliv_Backup_$(date +'%d_%m_%Y').zip"
+          zip -r "$ZIP_NAME" . -x "*.git*"
+          echo "FILE_TO_UPLOAD=$ZIP_NAME" >> $GITHUB_ENV
+
+      - name: Upload to Google Drive
+        run: |
+          # 1. Get a fresh Access Token using your VIP keys
+          ACCESS_TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
+            -d client_id="${{ secrets.GDRIVE_CLIENT_ID }}" \
+            -d client_secret="${{ secrets.GDRIVE_CLIENT_SECRET }}" \
+            -d refresh_token="${{ secrets.GDRIVE_REFRESH_TOKEN }}" \
+            -d grant_type=refresh_token | jq -r .access_token)
+            
+          # 2. Upload the ZIP file directly to your Drive folder
+          curl -X POST -L \
+            -H "Authorization: Bearer $ACCESS_TOKEN" \
+            -F "metadata={name : '${{ env.FILE_TO_UPLOAD }}', parents: ['${{ secrets.GDRIVE_FOLDER_ID }}']};type=application/json;charset=UTF-8" \
+            -F "file=@${{ env.FILE_TO_UPLOAD }}" \
+            "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
