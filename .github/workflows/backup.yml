@@ -2,8 +2,9 @@ name: 15-Day Website Backup to Google Drive
 
 on:
   schedule:
-    # Runs on the 1st and 16th of every month
-    - cron: '0 0 1,16 * *'
+    # Runs on the 1st and 16th of every month at exactly 2:23 AM UTC (7:53 AM IST)
+    # Using a random minute (23) avoids GitHub's global traffic jams!
+    - cron: '23 2 1,16 * *'
   workflow_dispatch:
 
 jobs:
