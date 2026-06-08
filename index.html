@@ -109,13 +109,19 @@
         .service-card:hover img { transform: scale(1.08); }
         .service-card h4 { padding: 25px 20px; text-align: center; font-size: 1.25rem; border-top: 3px solid var(--primary); margin: 0; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
 
-        /* --- Technology Partners / Certificates --- */
-        .partner-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center; }
+        /* --- Technology Partners / Certificates Layout --- */
+        .partner-grid { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            justify-content: center; 
+            align-items: stretch; /* Magic line: Makes all certificate boxes uniform height */
+        }
         .partner-logo {
-            width: 280px; /* Wider size so people can easily read the text on the certificates */
-            height: auto; /* Automatically scales the document aspect ratio */
+            width: 280px; /* Expanded width so text in documents is clear and sharp */
+            min-height: 200px; /* Gives a perfect framing layout block for documents */
             background: #ffffff;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid var(--border);
             border-radius: 8px;
             box-shadow: var(--shadow-sm);
@@ -124,9 +130,25 @@
             align-items: center;
             justify-content: center;
         }
-        .partner-logo:hover { transform: scale(1.05); box-shadow: var(--shadow-md); }
-        .partner-logo img { max-width: 100%; height: auto; object-fit: contain; border-radius: 4px; }
+        .partner-logo:hover { 
+            transform: translateY(-5px); /* Smooth lift effect on hover */
+            box-shadow: var(--shadow-md); 
+        }
+        .partner-logo img { 
+            max-width: 100%; 
+            height: auto; 
+            max-height: 100%;
+            object-fit: contain; /* Prevents stretching, maintains exact certificate proportions */
+            border-radius: 4px; 
+        }
 
+        /* Responsive Fix for Mobile screens */
+        @media (max-width: 480px) {
+            .partner-logo {
+                width: 100%; /* Spreads nicely across small phone screens */
+                min-height: auto;
+            }
+        }
         /* --- Staffing & Expertise --- */
         .staff-container {
             display: flex; gap: 60px; align-items: center; background: var(--white);
