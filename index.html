@@ -139,7 +139,34 @@
             height: auto; 
             max-height: 100%;
             object-fit: contain; /* Prevents stretching, maintains exact certificate proportions */
-            border-radius: 4px; 
+            border-radius: 4px;
+            cursor: zoom-in; /* <-- ADDED THIS LINE */
+        }
+
+        /* --- ADDED: Image Zoom Modal CSS --- */
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 10vh;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            cursor: zoom-out;
+        }
+        .zoom-modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
         }
 
         /* Responsive Fix for Mobile screens */
@@ -412,5 +439,27 @@
         </div>
     </footer>
 
-</body>
+    <div id="imageModal" class="zoom-modal">
+        <img class="zoom-modal-content" id="zoomedImage">
+    </div>
+
+    <script>
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("zoomedImage");
+        const partnerImages = document.querySelectorAll(".partner-logo img");
+
+        // When a user clicks a partner logo, open the modal and set the image source
+        partnerImages.forEach(img => {
+            img.addEventListener("click", function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+        });
+
+        // When a user clicks anywhere on the dark background or the image, close it
+        modal.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+    </script>
+    </body>
 </html>
